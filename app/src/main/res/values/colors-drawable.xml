@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <drawable name="transparent_drawable">#00000000</drawable>
+    <!-- 标题栏返回 的按下效果 -->
+    <drawable name="tite_back_press">#2980D7</drawable>
+    <!-- CROP  IMAGE -->
+    <drawable name="crop_but_bg_pressed">#363839</drawable>
+
+</resources>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <FrameLayout
+        android:id="@+id/fl_inner"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/size_12"
+        android:paddingLeft="@dimen/size_24"
+        android:paddingRight="@dimen/size_24"
+        android:paddingTop="@dimen/size_12">
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:layout_marginRight="@dimen/size_45">
+
+            <ImageView
+                android:id="@+id/pull_to_refresh_image"
+                android:layout_width="@dimen/size_18"
+                android:layout_height="@dimen/size_20"
+                android:layout_gravity="center" />
+
+            <ImageView
+                android:id="@+id/pull_to_refresh_progress"
+                android:layout_width="18dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center"
+                android:src="@drawable/pulltorefresh_loading"
+                android:visibility="gone" />
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/pull_to_refresh_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:textAppearance="?android:attr/textAppearance"
+                android:textColor="@color/color_656565"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/pull_to_refresh_sub_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="#656565"
+                android:textSize="9sp"
+                android:visibility="gone" />
+        </LinearLayout>
+    </FrameLayout>
+
+</merge>

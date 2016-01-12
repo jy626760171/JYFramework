@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.jy.framework.view.TitleHeaderBar
+        android:id="@+id/mints_content_frame_title_header"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_45" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_0_5"
+        android:background="@color/color_CCCCCC" />
+
+    <FrameLayout
+        android:id="@+id/mints_content_frame_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" />
+
+</LinearLayout>

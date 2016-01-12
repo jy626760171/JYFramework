@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">JYFramework</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+	<!--退出应用-->
+    <string name="mints_exit_tip">再按一次，退出程序</string>
+    <!--下拉刷新，上拉加载-->
+    <string name="pull_to_refresh_pull_label">下拉刷新</string>
+    <string name="pull_to_refresh_release_label">释放更新</string>
+    <string name="pull_to_refresh_refreshing_label">加载中</string>
+    <string name="pull_to_refresh_footer_release_label">松开后加载</string>
+    <string name="pull_to_refresh_footer_pull_label">上拉加载更多</string>
+    <string name="pull_to_refresh_footer_gone">加载完成</string>
+    <string name="pull_to_refresh_footer_refreshing_label">加载中</string>
+</resources>
