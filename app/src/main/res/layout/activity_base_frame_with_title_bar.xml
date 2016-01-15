@@ -4,10 +4,10 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.jy.framework.view.TitleHeaderBar
-        android:id="@+id/mints_content_frame_title_header"
+    <com.jy.framework.view.BaseTitleBar
+        android:id="@+id/activity_frame_title_bar"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/size_45" />
+        android:layout_height="wrap_content" />
 
     <View
         android:layout_width="match_parent"
@@ -15,7 +15,7 @@
         android:background="@color/color_CCCCCC" />
 
     <FrameLayout
-        android:id="@+id/mints_content_frame_content"
+        android:id="@+id/activity_frame_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical" />

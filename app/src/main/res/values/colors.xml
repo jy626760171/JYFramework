@@ -17,4 +17,6 @@
     <color name="color_EFEFF4">#EFEFF4</color>
     <color name="color_FFFFFF">#FFFFFF</color>
     <color name="color_90EE90">#90EE90</color>
+    <color name="default_title_left_right_sel">#2980D7</color>
+    <color name="default_title_bar_bg">#00A0E9</color>
 </resources>

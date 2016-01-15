@@ -11,10 +11,6 @@ public class MainActivity extends TitleBaseActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-
-		setHeaderLeftTitle("退出");
-		setHeaderBackground(R.color.color_168EFE);
-		setHeaderTitle("首页");
 	}
 
 }

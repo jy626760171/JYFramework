@@ -45,5 +45,6 @@
     <dimen name="size_13">13dp</dimen>
     <dimen name="size_70">70dp</dimen>
     <dimen name="size_60">60dp</dimen>
-    
+    <dimen name="default_title_left_right_padding">12dp</dimen>
+
 </resources>

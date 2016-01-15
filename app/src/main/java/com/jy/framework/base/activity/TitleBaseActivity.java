@@ -1,25 +1,22 @@
 package com.jy.framework.base.activity;
 
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 
 import com.jy.framework.R;
-import com.jy.framework.utils.AndroidOSUtils;
+import com.jy.framework.view.BaseTitleBar;
+import com.jy.framework.view.BaseTitleBar.OnLeftRightClickListener;
 import com.jy.framework.view.CustomLoading;
-import com.jy.framework.view.TitleHeaderBar;
 
-public abstract class TitleBaseActivity extends BaseActivity {
+public abstract class TitleBaseActivity extends BaseActivity implements OnLeftRightClickListener{
 
-	private TitleHeaderBar mTitleHeaderBar;
+	private BaseTitleBar mTitleBar;
 	private FrameLayout mContentContainer;
 
 	@Override
@@ -28,30 +25,15 @@ public abstract class TitleBaseActivity extends BaseActivity {
 		initViews();
 	}
 
-	protected int getFrameLayoutId() {
-		return R.layout.mints_base_content_frame_with_title_header;
-	}
-
-	protected TitleHeaderBar getTitleHeaderBar() {
-		return (TitleHeaderBar) findViewById(R.id.mints_content_frame_title_header);
-	}
-
-	protected FrameLayout getContentContainer() {
-		return (FrameLayout) findViewById(R.id.mints_content_frame_content);
-	}
-
 	protected void initViews() {
-		super.setContentView(getFrameLayoutId());
-		mContentContainer = getContentContainer();
-		mTitleHeaderBar = getTitleHeaderBar();
+		super.setContentView(R.layout.activity_base_frame_with_title_bar);
+		mContentContainer = (FrameLayout) findViewById(R.id.activity_frame_container);
+		mTitleBar = (BaseTitleBar) findViewById(R.id.activity_frame_title_bar);
 		if (enableTitleBar()) {
-			if (enableDefaultBack()) {
-				mTitleHeaderBar.setLeftOnClickListener(mLeftOnClickListener);
-			} else {
-				mTitleHeaderBar.getLeftViewContainer().setVisibility(View.INVISIBLE);
-			}
+			mTitleBar.setOnLeftRightClickListener(this);
+			if(!enableDefaultBack()) mTitleBar.mLeftContainer.setVisibility(View.GONE);
 		} else {
-			mTitleHeaderBar.setVisibility(View.GONE);
+			mTitleBar.setVisibility(View.GONE);
 		}
 	}
 
@@ -75,100 +57,13 @@ public abstract class TitleBaseActivity extends BaseActivity {
 		mContentContainer.addView(view);
 	}
 
-	public void setContentViewSupper(int layoutResID) {
-		super.setContentView(layoutResID);
-	}
-
-	protected RelativeLayout getRightContainerView() {
-		return mTitleHeaderBar.getRightViewContainer();
-	}
-
-	protected RelativeLayout getCenterContainerView() {
-		return mTitleHeaderBar.getCenterViewContainer();
-	}
-
-	protected void setCustomizedRightView(View view, int index) {
-		mTitleHeaderBar.setCustomizedRightView(view, index);
-	}
-
-	protected void setCustomizedRightView(View view) {
-		mTitleHeaderBar.setCustomizedRightView(view);
-	}
-
-	protected void removeRightView(View view) {
-		mTitleHeaderBar.getRightViewContainer().removeView(view);
-	}
-
-	protected void removeCenterView(View view) {
-		mTitleHeaderBar.getCenterViewContainer().removeView(view);
-	}
-
-	protected void setHeaderBackground(int resid) {
-		mTitleHeaderBar.setBackgroundResource(resid);
-	}
-
-	protected void setCustomizedCenterView(View view) {
-		mTitleHeaderBar.setCustomizedCenterView(view);
-	}
-
-	protected void setCustomizedCenterView(int layoutResID) {
-		mTitleHeaderBar.setCustomizedCenterView(layoutResID);
-	}
-
-	@SuppressWarnings("deprecation")
-	protected void setHeaderBackground(Drawable drawable) {
-		if (AndroidOSUtils.getCurrentAPILevel() < 16) {
-			mTitleHeaderBar.setBackgroundDrawable(drawable);
-		} else {
-			if (AndroidOSUtils.getCurrentAPILevel() >= 16) {
-				mTitleHeaderBar.setBackground(drawable);
-			} else {
-				mTitleHeaderBar.setBackgroundDrawable(drawable);
-			}
-		}
-	}
-
-	protected void setCustomizedLeftView(int layoutId) {
-		mTitleHeaderBar.setCustomizedLeftView(layoutId);
-	}
-
-	protected void setCustomizedLeftView(View view) {
-		mTitleHeaderBar.setCustomizedLeftView(view);
-	}
-
-	protected void setHeaderLeftTitle(int resId) {
-		setHeaderLeftTitle(getString(resId));
-	}
-
-	protected void setHeaderLeftTitle(String title) {
-		mTitleHeaderBar.setLeftTitle(title);
-	}
-
-	protected void setHeaderTitle(int id) {
-		setHeaderTitle(getString(id));
-	}
-
-	protected void setHeaderTitle(String title) {
-		mTitleHeaderBar.setCenterTitle(title);
-	}
-
-	private final OnClickListener mLeftOnClickListener = new OnClickListener() {
-
-		@Override
-		public void onClick(View v) {
-			if (!processBackPressed()) {
-				doReturnBack();
-			}
-		}
-	};
-
 	private boolean mEnableProgressbar = false;
 
 	protected void showProgressBar() {
-		View progressbar = getContentContainer().findViewById(R.id.progress);
+		View progressbar = mContentContainer.findViewById(R.id.progress);
 		if (null == progressbar) {
 			progressbar = createProgressbar();
-			getContentContainer().addView(progressbar);
+			mContentContainer.addView(progressbar);
 		}
 		progressbarBringToFront(progressbar);
 		mEnableProgressbar = true;
@@ -184,8 +79,8 @@ public abstract class TitleBaseActivity extends BaseActivity {
 
 	protected void hideProgressBar() {
 		if (mEnableProgressbar) {
-			View progressbar = getContentContainer().findViewById(R.id.progress);
-			if (null != progressbar) getContentContainer().removeView(progressbar);
+			View progressbar = mContentContainer.findViewById(R.id.progress);
+			if (null != progressbar) mContentContainer.removeView(progressbar);
 			mEnableProgressbar = false;
 		}
 	}
@@ -197,9 +92,9 @@ public abstract class TitleBaseActivity extends BaseActivity {
 		}
 		if (event.getAction() == KeyEvent.ACTION_DOWN) {
 			switch (event.getKeyCode()) {
-			case KeyEvent.KEYCODE_BACK:
-				finish();
-				return true;
+				case KeyEvent.KEYCODE_BACK:
+					finish();
+					return true;
 			}
 		}
 		return super.dispatchKeyEvent(event);
@@ -216,5 +111,17 @@ public abstract class TitleBaseActivity extends BaseActivity {
 		progressBar.setLayoutParams(locLayoutParams);
 
 		return progressBar;
+	}
+
+	@Override
+	public void onLeftClick() {
+		if (!processBackPressed()) {
+			doReturnBack();
+		}
+	}
+
+	@Override
+	public void onRightClick() {
+
 	}
 }
