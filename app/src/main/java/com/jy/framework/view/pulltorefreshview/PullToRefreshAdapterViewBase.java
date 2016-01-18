@@ -1,12 +1,12 @@
 /*******************************************************************************
  * Copyright 2011, 2012 Chris Banes.
- *
+ * <p/>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ * <p/>
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p/>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -29,7 +29,6 @@ import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 
 import com.jy.framework.R;
@@ -85,7 +84,7 @@ public abstract class PullToRefreshAdapterViewBase<T extends AbsListView> extend
 
 	/**
 	 * Gets whether an indicator graphic should be displayed when the View is in a state where a Pull-to-Refresh can happen. An example of this state is when the Adapter View is scrolled to the top and the mode is set to {@link Mode#PULL_FROM_START}. The default value is <var>true</var> if {@link PullToRefreshBase#isPullToRefreshOverScrollEnabled() isPullToRefreshOverScrollEnabled()} returns false.
-	 * 
+	 *
 	 * @return true if the indicators will be shown
 	 */
 	public boolean getShowIndicator() {
@@ -137,7 +136,7 @@ public abstract class PullToRefreshAdapterViewBase<T extends AbsListView> extend
 
 	/**
 	 * Pass-through method for {@link PullToRefreshBase#getRefreshableView() getRefreshableView()}. {@link AdapterView#setAdapter(Adapter)} setAdapter(adapter)}. This is just for convenience!
-	 * 
+	 *
 	 * @param adapter
 	 *            - Adapter to set
 	 */
@@ -151,7 +150,7 @@ public abstract class PullToRefreshAdapterViewBase<T extends AbsListView> extend
 	 * We need it handle it ourselves so that we can Pull-to-Refresh when the Empty View is shown.
 	 * <p/>
 	 * Please note, you do <strong>not</strong> usually need to call this method yourself. Calling setEmptyView on the AdapterView will automatically call this method and set everything up. This includes when the Android Framework automatically sets the Empty View based on it's ID.
-	 * 
+	 *
 	 * @param newEmptyView
 	 *            - Empty View to be used
 	 */
@@ -188,7 +187,7 @@ public abstract class PullToRefreshAdapterViewBase<T extends AbsListView> extend
 
 	/**
 	 * Pass-through method for {@link PullToRefreshBase#getRefreshableView() getRefreshableView()}. {@link AdapterView#setOnItemClickListener(OnItemClickListener) setOnItemClickListener(listener)}. This is just for convenience!
-	 * 
+	 *
 	 * @param listener
 	 *            - OnItemClickListener to use
 	 */
@@ -210,7 +209,7 @@ public abstract class PullToRefreshAdapterViewBase<T extends AbsListView> extend
 
 	/**
 	 * Sets whether an indicator graphic should be displayed when the View is in a state where a Pull-to-Refresh can happen. An example of this state is when the Adapter View is scrolled to the top and the mode is set to {@link Mode#PULL_FROM_START}
-	 * 
+	 *
 	 * @param showIndicator
 	 *            - true if the indicators should be shown.
 	 */
@@ -232,15 +231,15 @@ public abstract class PullToRefreshAdapterViewBase<T extends AbsListView> extend
 
 		if (getShowIndicatorInternal()) {
 			switch (getCurrentMode()) {
-			case PULL_FROM_END:
-				mIndicatorIvBottom.pullToRefresh();
-				break;
-			case PULL_FROM_START:
-				mIndicatorIvTop.pullToRefresh();
-				break;
-			default:
-				// NO-OP
-				break;
+				case PULL_FROM_END:
+					mIndicatorIvBottom.pullToRefresh();
+					break;
+				case PULL_FROM_START:
+					mIndicatorIvTop.pullToRefresh();
+					break;
+				default:
+					// NO-OP
+					break;
 			}
 		}
 	}
@@ -259,15 +258,15 @@ public abstract class PullToRefreshAdapterViewBase<T extends AbsListView> extend
 
 		if (getShowIndicatorInternal()) {
 			switch (getCurrentMode()) {
-			case PULL_FROM_END:
-				mIndicatorIvBottom.releaseToRefresh();
-				break;
-			case PULL_FROM_START:
-				mIndicatorIvTop.releaseToRefresh();
-				break;
-			default:
-				// NO-OP
-				break;
+				case PULL_FROM_END:
+					mIndicatorIvBottom.releaseToRefresh();
+					break;
+				case PULL_FROM_START:
+					mIndicatorIvTop.releaseToRefresh();
+					break;
+				default:
+					// NO-OP
+					break;
 			}
 		}
 	}

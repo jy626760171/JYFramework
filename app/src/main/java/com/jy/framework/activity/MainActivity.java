@@ -13,4 +13,10 @@ public class MainActivity extends TitleBaseActivity {
 		setContentView(R.layout.activity_main);
 	}
 
+	@Override
+	protected boolean enableTitleBar() {
+		return true;
+	}
+
+
 }

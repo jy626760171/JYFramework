@@ -7,10 +7,9 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.LinearLayout;
 
 /**
- * 
+ * @version 1.0 通过xml来设置 滑动块
  * @author试着飞
  * @date 2014年11月2日
- * @version 1.0 通过xml来设置 滑动块
  */
 public class LayoutBar implements ScrollBar {
 	protected Context context;

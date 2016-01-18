@@ -1,12 +1,12 @@
 package com.jy.framework.net.builder;
 
-import java.io.File;
-import java.util.IdentityHashMap;
-import java.util.Map;
-
 import com.jy.framework.net.request.PostFileRequest;
 import com.jy.framework.net.request.RequestCall;
 import com.squareup.okhttp.MediaType;
+
+import java.io.File;
+import java.util.IdentityHashMap;
+import java.util.Map;
 
 /**
  * Created by zhy on 15/12/14.

@@ -52,10 +52,8 @@ public class IndicatorViewPager {
 	/**
 	 * 切换至指定的页面
 	 *
-	 * @param item
-	 *            页面的索引
-	 * @param anim
-	 *            是否动画效果
+	 * @param item 页面的索引
+	 * @param anim 是否动画效果
 	 */
 	public void setCurrentItem(int item, boolean anim) {
 		viewPager.setCurrentItem(item, anim);
@@ -82,7 +80,7 @@ public class IndicatorViewPager {
 
 	/**
 	 * 设置indicatorView的滑动块样式
-	 * 
+	 *
 	 * @param scrollBar
 	 */
 	public void setIndicatorScrollBar(ScrollBar scrollBar) {
@@ -92,7 +90,7 @@ public class IndicatorViewPager {
 	/**
 	 * 设置缓存界面的个数，左右两边缓存界面的个数，不会被重新创建。<br>
 	 * 默认是1，表示左右两边 相连的1个界面和当前界面都会被缓存住，比如切换到左边的一个界面，那个界面是不会重新创建的。
-	 * 
+	 *
 	 * @param limit
 	 */
 	public void setPageOffscreenLimit(int limit) {
@@ -224,9 +222,8 @@ public class IndicatorViewPager {
 
 	/**
 	 * viewpage 的每个页面是view的形式
-	 * 
+	 *
 	 * @author Administrator
-	 * 
 	 */
 	public static abstract class IndicatorViewPagerAdapter implements IndicatorPagerAdapter {
 
@@ -300,9 +297,8 @@ public class IndicatorViewPager {
 
 	/**
 	 * viewpage 的每个页面是Fragment的形式
-	 * 
+	 *
 	 * @author Administrator
-	 * 
 	 */
 	public static abstract class IndicatorFragmentPagerAdapter implements IndicatorPagerAdapter {
 		private FragmentListPageAdapter pagerAdapter;

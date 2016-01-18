@@ -17,7 +17,7 @@ import com.jy.framework.R;
 /**
  * Created by jiangy on 2016/1/15.
  */
-public final class BaseTitleBar extends RelativeLayout implements View.OnClickListener{
+public final class BaseTitleBar extends RelativeLayout implements View.OnClickListener {
 
 	public FrameLayout mLeftContainer;
 	private LinearLayout mLeftChildrenContainer;
@@ -33,8 +33,9 @@ public final class BaseTitleBar extends RelativeLayout implements View.OnClickLi
 
 	private OnLeftRightClickListener mListener;
 
-	public interface OnLeftRightClickListener{
+	public interface OnLeftRightClickListener {
 		public void onLeftClick();
+
 		public void onRightClick();
 	}
 
@@ -63,42 +64,42 @@ public final class BaseTitleBar extends RelativeLayout implements View.OnClickLi
 		mRightChildrenContainer.setOnClickListener(this);
 	}
 
-	public void setOnLeftRightClickListener(OnLeftRightClickListener listener){
+	public void setOnLeftRightClickListener(OnLeftRightClickListener listener) {
 		this.mListener = listener;
 	}
 
-	public void hideView(View view){
+	public void hideView(View view) {
 		view.setVisibility(View.GONE);
 	}
 
-	public void setCustomizedView(ViewGroup parent, View child){
-		if(parent == null || child == null) return;
+	public void setCustomizedView(ViewGroup parent, View child) {
+		if (parent == null || child == null) return;
 		parent.removeAllViews();
 		parent.addView(child);
 	}
 
-	public void setCustomizedView(ViewGroup parent, int childLayoutId){
-		if(parent == null) return;
+	public void setCustomizedView(ViewGroup parent, int childLayoutId) {
+		if (parent == null) return;
 		View child = LayoutInflater.from(parent.getContext()).inflate(childLayoutId, null);
 		setCustomizedView(parent, child);
 	}
 
-	public void setBackground(View view, int resId){
-		if(view == null) return;
+	public void setBackground(View view, int resId) {
+		if (view == null) return;
 		try {
 			view.setBackgroundResource(resId);
-		}catch (Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 			hideView(view);
 			return;
 		}
 	}
 
-	public void setIcon(ImageView view, int resId){
-		if(view == null) return;
+	public void setIcon(ImageView view, int resId) {
+		if (view == null) return;
 		try {
 			view.setImageResource(resId);
-		}catch (Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 			hideView(view);
 			return;
@@ -106,12 +107,12 @@ public final class BaseTitleBar extends RelativeLayout implements View.OnClickLi
 
 	}
 
-	public void setText(TextView view, int stringId){
-		if(view == null) return;
+	public void setText(TextView view, int stringId) {
+		if (view == null) return;
 		String text = null;
 		try {
 			text = getResources().getString(stringId);
-		}catch (Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 			hideView(view);
 			return;
@@ -119,9 +120,9 @@ public final class BaseTitleBar extends RelativeLayout implements View.OnClickLi
 		setText(view, text);
 	}
 
-	public void setText(TextView view, String text){
-		if(view == null) return;
-		if(TextUtils.isEmpty(text)){
+	public void setText(TextView view, String text) {
+		if (view == null) return;
+		if (TextUtils.isEmpty(text)) {
 			hideView(view);
 			return;
 		}
@@ -130,8 +131,8 @@ public final class BaseTitleBar extends RelativeLayout implements View.OnClickLi
 
 	@Override
 	public void onClick(View v) {
-		if(mListener == null) return;
-		switch (v.getId()){
+		if (mListener == null) return;
+		switch (v.getId()) {
 			case R.id.default_title_left_view:
 				mListener.onLeftClick();
 				break;

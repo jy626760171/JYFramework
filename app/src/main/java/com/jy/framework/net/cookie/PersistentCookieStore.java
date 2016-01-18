@@ -1,5 +1,10 @@
 package com.jy.framework.net.cookie;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.text.TextUtils;
+import android.util.Log;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -15,11 +20,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.text.TextUtils;
-import android.util.Log;
 
 /**
  * <pre>
@@ -45,8 +45,7 @@ public class PersistentCookieStore implements CookieStore {
 	/**
 	 * Construct a persistent cookie store.
 	 *
-	 * @param context
-	 *            Context to attach cookie store to
+	 * @param context Context to attach cookie store to
 	 */
 	public PersistentCookieStore(Context context) {
 		cookiePrefs = context.getSharedPreferences(COOKIE_PREFS, 0);
@@ -62,7 +61,8 @@ public class PersistentCookieStore implements CookieStore {
 					if (encodedCookie != null) {
 						HttpCookie decodedCookie = decodeCookie(encodedCookie);
 						if (decodedCookie != null) {
-							if (!cookies.containsKey(entry.getKey())) cookies.put(entry.getKey(), new ConcurrentHashMap<String, HttpCookie>());
+							if (!cookies.containsKey(entry.getKey()))
+								cookies.put(entry.getKey(), new ConcurrentHashMap<String, HttpCookie>());
 							cookies.get(entry.getKey()).put(name, decodedCookie);
 						}
 					}
@@ -78,7 +78,8 @@ public class PersistentCookieStore implements CookieStore {
 
 		// Save cookie into local store, or remove if expired
 		if (!cookie.hasExpired()) {
-			if (!cookies.containsKey(uri.getHost())) cookies.put(uri.getHost(), new ConcurrentHashMap<String, HttpCookie>());
+			if (!cookies.containsKey(uri.getHost()))
+				cookies.put(uri.getHost(), new ConcurrentHashMap<String, HttpCookie>());
 			cookies.get(uri.getHost()).put(name, cookie);
 		} else {
 			if (cookies.containsKey(uri.toString())) cookies.get(uri.getHost()).remove(name);
@@ -156,8 +157,7 @@ public class PersistentCookieStore implements CookieStore {
 	/**
 	 * Serializes Cookie object into String
 	 *
-	 * @param cookie
-	 *            cookie to be encoded, can be null
+	 * @param cookie cookie to be encoded, can be null
 	 * @return cookie encoded as String
 	 */
 	protected String encodeCookie(SerializableHttpCookie cookie) {
@@ -177,8 +177,7 @@ public class PersistentCookieStore implements CookieStore {
 	/**
 	 * Returns cookie decoded from cookie string
 	 *
-	 * @param cookieString
-	 *            string of cookie as returned from http request
+	 * @param cookieString string of cookie as returned from http request
 	 * @return decoded cookie or null if exception occured
 	 */
 	protected HttpCookie decodeCookie(String cookieString) {
@@ -200,8 +199,7 @@ public class PersistentCookieStore implements CookieStore {
 	/**
 	 * Using some super basic byte array &lt;-&gt; hex conversions so we don't have to rely on any large Base64 libraries. Can be overridden if you like!
 	 *
-	 * @param bytes
-	 *            byte array to be converted
+	 * @param bytes byte array to be converted
 	 * @return string containing hex values
 	 */
 	protected String byteArrayToHexString(byte[] bytes) {
@@ -219,8 +217,7 @@ public class PersistentCookieStore implements CookieStore {
 	/**
 	 * Converts hex values from strings to byte arra
 	 *
-	 * @param hexString
-	 *            string of hex-encoded values
+	 * @param hexString string of hex-encoded values
 	 * @return decoded byte array
 	 */
 	protected byte[] hexStringToByteArray(String hexString) {

@@ -1,12 +1,12 @@
 /*******************************************************************************
  * Copyright 2011, 2012 Chris Banes.
- *
+ * <p/>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ * <p/>
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p/>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -67,13 +67,13 @@ public abstract class LoadingLayout extends FrameLayout implements ILoadingLayou
 		mScrollDirection = scrollDirection;
 
 		switch (scrollDirection) {
-		// case HORIZONTAL:
-		// LayoutInflater.from(context).inflate(R.layout.pull_to_refresh_header_horizontal, this);
-		// break;
-		case VERTICAL:
-		default:
-			LayoutInflater.from(context).inflate(R.layout.pull_to_refresh_header_vertical, this);
-			break;
+			// case HORIZONTAL:
+			// LayoutInflater.from(context).inflate(R.layout.pull_to_refresh_header_horizontal, this);
+			// break;
+			case VERTICAL:
+			default:
+				LayoutInflater.from(context).inflate(R.layout.pull_to_refresh_header_vertical, this);
+				break;
 		}
 
 		mInnerLayout = (FrameLayout) findViewById(R.id.fl_inner);
@@ -84,24 +84,24 @@ public abstract class LoadingLayout extends FrameLayout implements ILoadingLayou
 		LayoutParams lp = (LayoutParams) mInnerLayout.getLayoutParams();
 
 		switch (mode) {
-		case PULL_FROM_END:
-			lp.gravity = scrollDirection == PullToRefreshBase.Orientation.VERTICAL ? Gravity.TOP : Gravity.LEFT;
+			case PULL_FROM_END:
+				lp.gravity = scrollDirection == PullToRefreshBase.Orientation.VERTICAL ? Gravity.TOP : Gravity.LEFT;
 
-			// Load in labels
-			mPullLabel = context.getString(R.string.pull_to_refresh_footer_refreshing_label);
-			mRefreshingLabel = context.getString(R.string.pull_to_refresh_footer_refreshing_label);
-			mReleaseLabel = context.getString(R.string.pull_to_refresh_footer_refreshing_label);
-			break;
+				// Load in labels
+				mPullLabel = context.getString(R.string.pull_to_refresh_footer_refreshing_label);
+				mRefreshingLabel = context.getString(R.string.pull_to_refresh_footer_refreshing_label);
+				mReleaseLabel = context.getString(R.string.pull_to_refresh_footer_refreshing_label);
+				break;
 
-		case PULL_FROM_START:
-		default:
-			lp.gravity = scrollDirection == PullToRefreshBase.Orientation.VERTICAL ? Gravity.BOTTOM : Gravity.RIGHT;
+			case PULL_FROM_START:
+			default:
+				lp.gravity = scrollDirection == PullToRefreshBase.Orientation.VERTICAL ? Gravity.BOTTOM : Gravity.RIGHT;
 
-			// Load in labels
-			mPullLabel = context.getString(R.string.pull_to_refresh_pull_label);
-			mRefreshingLabel = context.getString(R.string.pull_to_refresh_refreshing_label);
-			mReleaseLabel = context.getString(R.string.pull_to_refresh_release_label);
-			break;
+				// Load in labels
+				mPullLabel = context.getString(R.string.pull_to_refresh_pull_label);
+				mRefreshingLabel = context.getString(R.string.pull_to_refresh_refreshing_label);
+				mReleaseLabel = context.getString(R.string.pull_to_refresh_release_label);
+				break;
 		}
 
 		if (attrs.hasValue(R.styleable.PullToRefresh_ptrHeaderBackground)) {
@@ -145,24 +145,24 @@ public abstract class LoadingLayout extends FrameLayout implements ILoadingLayou
 		// Check Specific Drawable from Attrs, these overrite the generic
 		// drawable attr above
 		switch (mode) {
-		case PULL_FROM_START:
-		default:
-			if (attrs.hasValue(R.styleable.PullToRefresh_ptrDrawableStart)) {
-				imageDrawable = attrs.getDrawable(R.styleable.PullToRefresh_ptrDrawableStart);
-			} else if (attrs.hasValue(R.styleable.PullToRefresh_ptrDrawableTop)) {
-				LogUtil.w("ptrDrawableTop", "ptrDrawableStart");
-				imageDrawable = attrs.getDrawable(R.styleable.PullToRefresh_ptrDrawableTop);
-			}
-			break;
+			case PULL_FROM_START:
+			default:
+				if (attrs.hasValue(R.styleable.PullToRefresh_ptrDrawableStart)) {
+					imageDrawable = attrs.getDrawable(R.styleable.PullToRefresh_ptrDrawableStart);
+				} else if (attrs.hasValue(R.styleable.PullToRefresh_ptrDrawableTop)) {
+					LogUtil.w("ptrDrawableTop", "ptrDrawableStart");
+					imageDrawable = attrs.getDrawable(R.styleable.PullToRefresh_ptrDrawableTop);
+				}
+				break;
 
-		case PULL_FROM_END:
-			if (attrs.hasValue(R.styleable.PullToRefresh_ptrDrawableEnd)) {
-				imageDrawable = attrs.getDrawable(R.styleable.PullToRefresh_ptrDrawableEnd);
-			} else if (attrs.hasValue(R.styleable.PullToRefresh_ptrDrawableBottom)) {
-				LogUtil.w("ptrDrawableBottom", "ptrDrawableEnd");
-				imageDrawable = attrs.getDrawable(R.styleable.PullToRefresh_ptrDrawableBottom);
-			}
-			break;
+			case PULL_FROM_END:
+				if (attrs.hasValue(R.styleable.PullToRefresh_ptrDrawableEnd)) {
+					imageDrawable = attrs.getDrawable(R.styleable.PullToRefresh_ptrDrawableEnd);
+				} else if (attrs.hasValue(R.styleable.PullToRefresh_ptrDrawableBottom)) {
+					LogUtil.w("ptrDrawableBottom", "ptrDrawableEnd");
+					imageDrawable = attrs.getDrawable(R.styleable.PullToRefresh_ptrDrawableBottom);
+				}
+				break;
 		}
 
 		// If we don't have a user defined drawable, load the default
@@ -205,11 +205,11 @@ public abstract class LoadingLayout extends FrameLayout implements ILoadingLayou
 
 	public final int getContentSize() {
 		switch (mScrollDirection) {
-		case HORIZONTAL:
-			return mInnerLayout.getWidth();
-		case VERTICAL:
-		default:
-			return mInnerLayout.getHeight();
+			case HORIZONTAL:
+				return mInnerLayout.getWidth();
+			case VERTICAL:
+			default:
+				return mInnerLayout.getHeight();
 		}
 	}
 

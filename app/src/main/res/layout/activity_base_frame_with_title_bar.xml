@@ -1,23 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
 
     <com.jy.framework.view.BaseTitleBar
         android:id="@+id/activity_frame_title_bar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/size_0_5"
-        android:background="@color/color_CCCCCC" />
+        android:layout_height="wrap_content"/>
 
     <FrameLayout
         android:id="@+id/activity_frame_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical" />
+        android:orientation="vertical"/>
 
 </LinearLayout>

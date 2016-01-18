@@ -61,7 +61,7 @@
         <FrameLayout
             android:id="@+id/default_title_right_view"
             style="@style/default_title_right_view_style"
-            android:background="@drawable/default_title_left_right_bg" >
+            android:background="@drawable/default_title_left_right_bg">
 
             <ImageView
                 android:id="@+id/default_title_right_view_icon"
@@ -72,4 +72,9 @@
         </FrameLayout>
     </FrameLayout>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_0_5"
+        android:layout_alignParentBottom="true"
+        android:background="@color/color_CCCCCC"/>
 </RelativeLayout>

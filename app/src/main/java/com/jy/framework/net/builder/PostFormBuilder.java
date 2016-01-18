@@ -1,13 +1,13 @@
 package com.jy.framework.net.builder;
 
+import com.jy.framework.net.request.PostFormRequest;
+import com.jy.framework.net.request.RequestCall;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Map;
-
-import com.jy.framework.net.request.PostFormRequest;
-import com.jy.framework.net.request.RequestCall;
 
 /**
  * Created by zhy on 15/12/14.

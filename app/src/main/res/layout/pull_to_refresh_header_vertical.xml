@@ -20,7 +20,7 @@
                 android:id="@+id/pull_to_refresh_image"
                 android:layout_width="@dimen/size_18"
                 android:layout_height="@dimen/size_20"
-                android:layout_gravity="center" />
+                android:layout_gravity="center"/>
 
             <ImageView
                 android:id="@+id/pull_to_refresh_progress"
@@ -28,7 +28,7 @@
                 android:layout_height="20dp"
                 android:layout_gravity="center"
                 android:src="@drawable/pulltorefresh_loading"
-                android:visibility="gone" />
+                android:visibility="gone"/>
         </FrameLayout>
 
         <LinearLayout
@@ -45,7 +45,7 @@
                 android:singleLine="true"
                 android:textAppearance="?android:attr/textAppearance"
                 android:textColor="@color/color_656565"
-                android:textSize="12sp" />
+                android:textSize="12sp"/>
 
             <TextView
                 android:id="@+id/pull_to_refresh_sub_text"
@@ -55,7 +55,7 @@
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textColor="#656565"
                 android:textSize="9sp"
-                android:visibility="gone" />
+                android:visibility="gone"/>
         </LinearLayout>
     </FrameLayout>
 

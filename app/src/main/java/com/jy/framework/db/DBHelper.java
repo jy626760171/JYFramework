@@ -16,7 +16,7 @@ public class DBHelper extends SQLiteOpenHelper {
 	//用于承载需要创建的表对象
 	private BaseTable[] tables = {};
 
-	public DBHelper(Context context){
+	public DBHelper(Context context) {
 		super(context, DBNAME, null, DB_VERSION);
 	}
 
@@ -29,7 +29,7 @@ public class DBHelper extends SQLiteOpenHelper {
 		for (BaseTable table : tables) {
 			try {
 				table.onCreate(db);
-			}catch (Exception e){
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}

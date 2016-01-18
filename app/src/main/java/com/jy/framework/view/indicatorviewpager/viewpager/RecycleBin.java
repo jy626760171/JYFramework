@@ -60,8 +60,7 @@ public class RecycleBin {
 	/**
 	 * Put a view into the ScrapViews list. These views are unordered.
 	 *
-	 * @param scrap
-	 *            The view to add
+	 * @param scrap The view to add
 	 */
 	@SuppressLint("NewApi")
 	void addScrapView(View scrap, int position, int viewType) {

@@ -1,12 +1,12 @@
 /*******************************************************************************
  * Copyright 2011, 2012 Chris Banes.
- *
+ * <p/>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ * <p/>
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p/>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -237,59 +237,59 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
 		}
 
 		switch (action) {
-		case MotionEvent.ACTION_MOVE: {
-			// If we're refreshing, and the flag is set. Eat all MOVE events
-			if (!mScrollingWhileRefreshingEnabled && isRefreshing()) {
-				return true;
-			}
-
-			if (isReadyForPull()) {
-				final float y = event.getY(), x = event.getX();
-				final float diff, oppositeDiff, absDiff;
-
-				// We need to use the correct values, based on scroll
-				// direction
-				switch (getPullToRefreshScrollDirection()) {
-				case HORIZONTAL:
-					diff = x - mLastMotionX;
-					oppositeDiff = y - mLastMotionY;
-					break;
-				case VERTICAL:
-				default:
-					diff = y - mLastMotionY;
-					oppositeDiff = x - mLastMotionX;
-					break;
+			case MotionEvent.ACTION_MOVE: {
+				// If we're refreshing, and the flag is set. Eat all MOVE events
+				if (!mScrollingWhileRefreshingEnabled && isRefreshing()) {
+					return true;
 				}
-				absDiff = Math.abs(diff);
 
-				if (absDiff > mTouchSlop && (!mFilterTouchEvents || absDiff > Math.abs(oppositeDiff))) {
-					if (mMode.showHeaderLoadingLayout() && diff >= 1f && isReadyForPullStart()) {
-						mLastMotionY = y;
-						mLastMotionX = x;
-						mIsBeingDragged = true;
-						if (mMode == Mode.BOTH) {
-							mCurrentMode = Mode.PULL_FROM_START;
-						}
-					} else if (mMode.showFooterLoadingLayout() && diff <= -1f && isReadyForPullEnd()) {
-						mLastMotionY = y;
-						mLastMotionX = x;
-						mIsBeingDragged = true;
-						if (mMode == Mode.BOTH) {
-							mCurrentMode = Mode.PULL_FROM_END;
+				if (isReadyForPull()) {
+					final float y = event.getY(), x = event.getX();
+					final float diff, oppositeDiff, absDiff;
+
+					// We need to use the correct values, based on scroll
+					// direction
+					switch (getPullToRefreshScrollDirection()) {
+						case HORIZONTAL:
+							diff = x - mLastMotionX;
+							oppositeDiff = y - mLastMotionY;
+							break;
+						case VERTICAL:
+						default:
+							diff = y - mLastMotionY;
+							oppositeDiff = x - mLastMotionX;
+							break;
+					}
+					absDiff = Math.abs(diff);
+
+					if (absDiff > mTouchSlop && (!mFilterTouchEvents || absDiff > Math.abs(oppositeDiff))) {
+						if (mMode.showHeaderLoadingLayout() && diff >= 1f && isReadyForPullStart()) {
+							mLastMotionY = y;
+							mLastMotionX = x;
+							mIsBeingDragged = true;
+							if (mMode == Mode.BOTH) {
+								mCurrentMode = Mode.PULL_FROM_START;
+							}
+						} else if (mMode.showFooterLoadingLayout() && diff <= -1f && isReadyForPullEnd()) {
+							mLastMotionY = y;
+							mLastMotionX = x;
+							mIsBeingDragged = true;
+							if (mMode == Mode.BOTH) {
+								mCurrentMode = Mode.PULL_FROM_END;
+							}
 						}
 					}
 				}
+				break;
 			}
-			break;
-		}
-		case MotionEvent.ACTION_DOWN: {
-			if (isReadyForPull()) {
-				mLastMotionY = mInitialMotionY = event.getY();
-				mLastMotionX = mInitialMotionX = event.getX();
-				mIsBeingDragged = false;
+			case MotionEvent.ACTION_DOWN: {
+				if (isReadyForPull()) {
+					mLastMotionY = mInitialMotionY = event.getY();
+					mLastMotionX = mInitialMotionX = event.getX();
+					mIsBeingDragged = false;
+				}
+				break;
 			}
-			break;
-		}
 		}
 
 		return mIsBeingDragged;
@@ -319,49 +319,49 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
 		}
 
 		switch (event.getAction()) {
-		case MotionEvent.ACTION_MOVE: {
-			if (mIsBeingDragged) {
-				mLastMotionY = event.getY();
-				mLastMotionX = event.getX();
-				pullEvent();
-				return true;
-			}
-			break;
-		}
-
-		case MotionEvent.ACTION_DOWN: {
-			if (isReadyForPull()) {
-				mLastMotionY = mInitialMotionY = event.getY();
-				mLastMotionX = mInitialMotionX = event.getX();
-				return true;
-			}
-			break;
-		}
-
-		case MotionEvent.ACTION_CANCEL:
-		case MotionEvent.ACTION_UP: {
-			if (mIsBeingDragged) {
-				mIsBeingDragged = false;
-
-				if (mState == State.RELEASE_TO_REFRESH && (null != mOnRefreshListener || null != mOnRefreshListener2)) {
-					setState(State.REFRESHING, true);
+			case MotionEvent.ACTION_MOVE: {
+				if (mIsBeingDragged) {
+					mLastMotionY = event.getY();
+					mLastMotionX = event.getX();
+					pullEvent();
 					return true;
 				}
+				break;
+			}
 
-				// If we're already refreshing, just scroll back to the top
-				if (isRefreshing()) {
-					smoothScrollTo(0);
+			case MotionEvent.ACTION_DOWN: {
+				if (isReadyForPull()) {
+					mLastMotionY = mInitialMotionY = event.getY();
+					mLastMotionX = mInitialMotionX = event.getX();
 					return true;
 				}
-
-				// If we haven't returned by here, then we're not in a state
-				// to pull, so just reset
-				setState(State.RESET);
-
-				return true;
+				break;
 			}
-			break;
-		}
+
+			case MotionEvent.ACTION_CANCEL:
+			case MotionEvent.ACTION_UP: {
+				if (mIsBeingDragged) {
+					mIsBeingDragged = false;
+
+					if (mState == State.RELEASE_TO_REFRESH && (null != mOnRefreshListener || null != mOnRefreshListener2)) {
+						setState(State.REFRESHING, true);
+						return true;
+					}
+
+					// If we're already refreshing, just scroll back to the top
+					if (isRefreshing()) {
+						smoothScrollTo(0);
+						return true;
+					}
+
+					// If we haven't returned by here, then we're not in a state
+					// to pull, so just reset
+					setState(State.RESET);
+
+					return true;
+				}
+				break;
+			}
 		}
 
 		return false;
@@ -525,22 +525,22 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
 		}
 
 		switch (mState) {
-		case RESET:
-			onReset();
-			break;
-		case PULL_TO_REFRESH:
-			onPullToRefresh();
-			break;
-		case RELEASE_TO_REFRESH:
-			onReleaseToRefresh();
-			break;
-		case REFRESHING:
-		case MANUAL_REFRESHING:
-			onRefreshing(params[0]);
-			break;
-		case OVERSCROLLING:
-			// NO-OP
-			break;
+			case RESET:
+				onReset();
+				break;
+			case PULL_TO_REFRESH:
+				onPullToRefresh();
+				break;
+			case RELEASE_TO_REFRESH:
+				onReleaseToRefresh();
+				break;
+			case REFRESHING:
+			case MANUAL_REFRESHING:
+				onRefreshing(params[0]);
+				break;
+			case OVERSCROLLING:
+				// NO-OP
+				break;
 		}
 
 		// Call OnPullEventListener
@@ -589,7 +589,7 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
 	 * This is implemented by derived classes to return the created View. If you need to use a custom View (such as a custom ListView), override this method and return an instance of your custom class.
 	 * <p/>
 	 * Be sure to set the ID of the view in this method, especially if you're using a ListActivity or ListFragment.
-	 * 
+	 *
 	 * @param context
 	 *            Context to create view with
 	 * @param attrs
@@ -632,7 +632,7 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
 
 	/**
 	 * Allows Derivative classes to handle the XML Attrs without creating a TypedArray themsevles
-	 * 
+	 *
 	 * @param a
 	 *            - TypedArray of PullToRefresh Attributes
 	 */
@@ -641,21 +641,21 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
 
 	/**
 	 * Implemented by derived class to return whether the View is in a state where the user can Pull to Refresh by scrolling from the end.
-	 * 
+	 *
 	 * @return true if the View is currently in the correct state (for example, bottom of a ListView)
 	 */
 	protected abstract boolean isReadyForPullEnd();
 
 	/**
 	 * Implemented by derived class to return whether the View is in a state where the user can Pull to Refresh by scrolling from the start.
-	 * 
+	 *
 	 * @return true if the View is currently the correct state (for example, top of a ListView)
 	 */
 	protected abstract boolean isReadyForPullStart();
 
 	/**
 	 * Called by {@link #onRestoreInstanceState(Parcelable)} so that derivative classes can handle their saved instance state.
-	 * 
+	 *
 	 * @param savedInstanceState
 	 *            - Bundle which contains saved instance state.
 	 */
@@ -664,7 +664,7 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
 
 	/**
 	 * Called by {@link #onSaveInstanceState()} so that derivative classes can save their instance state.
-	 * 
+	 *
 	 * @param saveState
 	 *            - Bundle to be updated with saved state.
 	 */
@@ -676,21 +676,21 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
 	 */
 	protected void onPullToRefresh() {
 		switch (mCurrentMode) {
-		case PULL_FROM_END:
-			mFooterLayout.pullToRefresh();
-			break;
-		case PULL_FROM_START:
-			mHeaderLayout.pullToRefresh();
-			break;
-		default:
-			// NO-OP
-			break;
+			case PULL_FROM_END:
+				mFooterLayout.pullToRefresh();
+				break;
+			case PULL_FROM_START:
+				mHeaderLayout.pullToRefresh();
+				break;
+			default:
+				// NO-OP
+				break;
 		}
 	}
 
 	/**
 	 * Called when the UI has been to be updated to be in the {@link State#REFRESHING} or {@link State#MANUAL_REFRESHING} state.
-	 * 
+	 *
 	 * @param doScroll
 	 *            - Whether the UI should scroll for this event.
 	 */
@@ -714,14 +714,14 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
 				};
 
 				switch (mCurrentMode) {
-				case MANUAL_REFRESH_ONLY:
-				case PULL_FROM_END:
-					smoothScrollTo(getFooterSize(), listener);
-					break;
-				default:
-				case PULL_FROM_START:
-					smoothScrollTo(-getHeaderSize(), listener);
-					break;
+					case MANUAL_REFRESH_ONLY:
+					case PULL_FROM_END:
+						smoothScrollTo(getFooterSize(), listener);
+						break;
+					default:
+					case PULL_FROM_START:
+						smoothScrollTo(-getHeaderSize(), listener);
+						break;
 				}
 			} else {
 				smoothScrollTo(0);
@@ -741,15 +741,15 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
 	 */
 	public void onReleaseToRefresh() {
 		switch (mCurrentMode) {
-		case PULL_FROM_END:
-			mFooterLayout.releaseToRefresh();
-			break;
-		case PULL_FROM_START:
-			mHeaderLayout.releaseToRefresh();
-			break;
-		default:
-			// NO-OP
-			break;
+			case PULL_FROM_END:
+				mFooterLayout.releaseToRefresh();
+				break;
+			case PULL_FROM_START:
+				mHeaderLayout.releaseToRefresh();
+				break;
+			default:
+				// NO-OP
+				break;
 		}
 	}
 
@@ -848,37 +848,37 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
 		int pBottom = getPaddingBottom();
 
 		switch (getPullToRefreshScrollDirection()) {
-		case HORIZONTAL:
-			if (mMode.showHeaderLoadingLayout()) {
-				mHeaderLayout.setWidth(maximumPullScroll);
-				pLeft = -maximumPullScroll;
-			} else {
-				pLeft = 0;
-			}
+			case HORIZONTAL:
+				if (mMode.showHeaderLoadingLayout()) {
+					mHeaderLayout.setWidth(maximumPullScroll);
+					pLeft = -maximumPullScroll;
+				} else {
+					pLeft = 0;
+				}
 
-			if (mMode.showFooterLoadingLayout()) {
-				mFooterLayout.setWidth(maximumPullScroll);
-				pRight = -maximumPullScroll;
-			} else {
-				pRight = 0;
-			}
-			break;
+				if (mMode.showFooterLoadingLayout()) {
+					mFooterLayout.setWidth(maximumPullScroll);
+					pRight = -maximumPullScroll;
+				} else {
+					pRight = 0;
+				}
+				break;
 
-		case VERTICAL:
-			if (mMode.showHeaderLoadingLayout()) {
-				mHeaderLayout.setHeight(maximumPullScroll);
-				pTop = -maximumPullScroll;
-			} else {
-				pTop = 0;
-			}
+			case VERTICAL:
+				if (mMode.showHeaderLoadingLayout()) {
+					mHeaderLayout.setHeight(maximumPullScroll);
+					pTop = -maximumPullScroll;
+				} else {
+					pTop = 0;
+				}
 
-			if (mMode.showFooterLoadingLayout()) {
-				mFooterLayout.setHeight(maximumPullScroll);
-				pBottom = -maximumPullScroll;
-			} else {
-				pBottom = 0;
-			}
-			break;
+				if (mMode.showFooterLoadingLayout()) {
+					mFooterLayout.setHeight(maximumPullScroll);
+					pBottom = -maximumPullScroll;
+				} else {
+					pBottom = 0;
+				}
+				break;
 		}
 
 		if (DEBUG) {
@@ -893,24 +893,24 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
 		LayoutParams lp = (LayoutParams) mRefreshableViewWrapper.getLayoutParams();
 
 		switch (getPullToRefreshScrollDirection()) {
-		case HORIZONTAL:
-			if (lp.width != width) {
-				lp.width = width;
-				mRefreshableViewWrapper.requestLayout();
-			}
-			break;
-		case VERTICAL:
-			if (lp.height != height) {
-				lp.height = height;
-				mRefreshableViewWrapper.requestLayout();
-			}
-			break;
+			case HORIZONTAL:
+				if (lp.width != width) {
+					lp.width = width;
+					mRefreshableViewWrapper.requestLayout();
+				}
+				break;
+			case VERTICAL:
+				if (lp.height != height) {
+					lp.height = height;
+					mRefreshableViewWrapper.requestLayout();
+				}
+				break;
 		}
 	}
 
 	/**
 	 * Helper method which just calls scrollTo() in the correct scrolling direction.
-	 * 
+	 *
 	 * @param value
 	 *            - New Scroll value
 	 */
@@ -942,18 +942,18 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
 		}
 
 		switch (getPullToRefreshScrollDirection()) {
-		case VERTICAL:
-			scrollTo(0, value);
-			break;
-		case HORIZONTAL:
-			scrollTo(value, 0);
-			break;
+			case VERTICAL:
+				scrollTo(0, value);
+				break;
+			case HORIZONTAL:
+				scrollTo(value, 0);
+				break;
 		}
 	}
 
 	/**
 	 * Smooth Scroll to position using the default duration of {@value #SMOOTH_SCROLL_DURATION_MS} ms.
-	 * 
+	 *
 	 * @param scrollValue
 	 *            - Position to scroll to
 	 */
@@ -963,7 +963,7 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
 
 	/**
 	 * Smooth Scroll to position using the default duration of {@value #SMOOTH_SCROLL_DURATION_MS} ms.
-	 * 
+	 *
 	 * @param scrollValue
 	 *            - Position to scroll to
 	 * @param listener
@@ -975,7 +975,7 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
 
 	/**
 	 * Smooth Scroll to position using the longer default duration of {@value #SMOOTH_SCROLL_LONG_DURATION_MS} ms.
-	 * 
+	 *
 	 * @param scrollValue
 	 *            - Position to scroll to
 	 */
@@ -1037,13 +1037,13 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
 	@SuppressWarnings("deprecation")
 	private void init(Context context, AttributeSet attrs) {
 		switch (getPullToRefreshScrollDirection()) {
-		case HORIZONTAL:
-			setOrientation(LinearLayout.HORIZONTAL);
-			break;
-		case VERTICAL:
-		default:
-			setOrientation(LinearLayout.VERTICAL);
-			break;
+			case HORIZONTAL:
+				setOrientation(LinearLayout.HORIZONTAL);
+				break;
+			case VERTICAL:
+			default:
+				setOrientation(LinearLayout.VERTICAL);
+				break;
 		}
 
 		setGravity(Gravity.CENTER);
@@ -1106,20 +1106,20 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
 
 	private boolean isReadyForPull() {
 		switch (mMode) {
-		case PULL_FROM_START:
-			return isReadyForPullStart();
-		case PULL_FROM_END:
-			return isReadyForPullEnd();
-		case BOTH:
-			return isReadyForPullEnd() || isReadyForPullStart();
-		default:
-			return false;
+			case PULL_FROM_START:
+				return isReadyForPullStart();
+			case PULL_FROM_END:
+				return isReadyForPullEnd();
+			case BOTH:
+				return isReadyForPullEnd() || isReadyForPullStart();
+			default:
+				return false;
 		}
 	}
 
 	/**
 	 * Actions a Pull Event
-	 * 
+	 *
 	 * @return true if the Event has been handled, false if there has been no change
 	 */
 	private void pullEvent() {
@@ -1128,27 +1128,27 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
 		final float initialMotionValue, lastMotionValue;
 
 		switch (getPullToRefreshScrollDirection()) {
-		case HORIZONTAL:
-			initialMotionValue = mInitialMotionX;
-			lastMotionValue = mLastMotionX;
-			break;
-		case VERTICAL:
-		default:
-			initialMotionValue = mInitialMotionY;
-			lastMotionValue = mLastMotionY;
-			break;
+			case HORIZONTAL:
+				initialMotionValue = mInitialMotionX;
+				lastMotionValue = mLastMotionX;
+				break;
+			case VERTICAL:
+			default:
+				initialMotionValue = mInitialMotionY;
+				lastMotionValue = mLastMotionY;
+				break;
 		}
 
 		switch (mCurrentMode) {
-		case PULL_FROM_END:
-			newScrollValue = Math.round(Math.max(initialMotionValue - lastMotionValue, 0) / FRICTION);
-			itemDimension = getFooterSize();
-			break;
-		case PULL_FROM_START:
-		default:
-			newScrollValue = Math.round(Math.min(initialMotionValue - lastMotionValue, 0) / FRICTION);
-			itemDimension = getHeaderSize();
-			break;
+			case PULL_FROM_END:
+				newScrollValue = Math.round(Math.max(initialMotionValue - lastMotionValue, 0) / FRICTION);
+				itemDimension = getFooterSize();
+				break;
+			case PULL_FROM_START:
+			default:
+				newScrollValue = Math.round(Math.min(initialMotionValue - lastMotionValue, 0) / FRICTION);
+				itemDimension = getHeaderSize();
+				break;
 		}
 
 		setHeaderScroll(newScrollValue);
@@ -1156,13 +1156,13 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
 		if (newScrollValue != 0 && !isRefreshing()) {
 			float scale = Math.abs(newScrollValue) / (float) itemDimension;
 			switch (mCurrentMode) {
-			case PULL_FROM_END:
-				mFooterLayout.onPull(scale);
-				break;
-			case PULL_FROM_START:
-			default:
-				mHeaderLayout.onPull(scale);
-				break;
+				case PULL_FROM_END:
+					mFooterLayout.onPull(scale);
+					break;
+				case PULL_FROM_START:
+				default:
+					mHeaderLayout.onPull(scale);
+					break;
 			}
 
 			if (mState != State.PULL_TO_REFRESH && itemDimension >= Math.abs(newScrollValue)) {
@@ -1175,27 +1175,27 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
 
 	private LayoutParams getLoadingLayoutLayoutParams() {
 		switch (getPullToRefreshScrollDirection()) {
-		case HORIZONTAL:
-			return new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT);
-		case VERTICAL:
-		default:
-			return new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+			case HORIZONTAL:
+				return new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT);
+			case VERTICAL:
+			default:
+				return new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
 		}
 	}
 
 	private int getMaximumPullScroll() {
 		switch (getPullToRefreshScrollDirection()) {
-		case HORIZONTAL:
-			return Math.round(getWidth() / FRICTION);
-		case VERTICAL:
-		default:
-			return Math.round(getHeight() / FRICTION);
+			case HORIZONTAL:
+				return Math.round(getWidth() / FRICTION);
+			case VERTICAL:
+			default:
+				return Math.round(getHeight() / FRICTION);
 		}
 	}
 
 	/**
 	 * Smooth Scroll to position using the specific duration
-	 * 
+	 *
 	 * @param scrollValue
 	 *            - Position to scroll to
 	 * @param duration
@@ -1212,13 +1212,13 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
 
 		final int oldScrollValue;
 		switch (getPullToRefreshScrollDirection()) {
-		case HORIZONTAL:
-			oldScrollValue = getScrollX();
-			break;
-		case VERTICAL:
-		default:
-			oldScrollValue = getScrollY();
-			break;
+			case HORIZONTAL:
+				oldScrollValue = getScrollX();
+				break;
+			case VERTICAL:
+			default:
+				oldScrollValue = getScrollY();
+				break;
 		}
 
 		if (oldScrollValue != newScrollValue) {
@@ -1263,28 +1263,28 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
 
 		/**
 		 * Maps an int to a specific mode. This is needed when saving state, or inflating the view from XML where the mode is given through a attr int.
-		 * 
+		 *
 		 * @param modeInt
 		 *            - int to map a Mode to
 		 * @return Mode that modeInt maps to, or ROTATE by default.
 		 */
 		static AnimationStyle mapIntToValue(int modeInt) {
 			switch (modeInt) {
-			case 0x0:
-			default:
-				return ROTATE;
-			case 0x1:
-				return FLIP;
+				case 0x0:
+				default:
+					return ROTATE;
+				case 0x1:
+					return FLIP;
 			}
 		}
 
 		LoadingLayout createLoadingLayout(Context context, Mode mode, Orientation scrollDirection, TypedArray attrs) {
 			switch (this) {
-			case ROTATE:
-			default:
-				return new RotateLoadingLayout(context, mode, scrollDirection, attrs);
-			case FLIP:
-				return new FlipLoadingLayout(context, mode, scrollDirection, attrs);
+				case ROTATE:
+				default:
+					return new RotateLoadingLayout(context, mode, scrollDirection, attrs);
+				case FLIP:
+					return new FlipLoadingLayout(context, mode, scrollDirection, attrs);
 			}
 		}
 	}
@@ -1328,7 +1328,7 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
 
 		/**
 		 * Maps an int to a specific mode. This is needed when saving state, or inflating the view from XML where the mode is given through a attr int.
-		 * 
+		 *
 		 * @param modeInt
 		 *            - int to map a Mode to
 		 * @return Mode that modeInt maps to, or PULL_FROM_START by default.
@@ -1388,7 +1388,7 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
 
 	/**
 	 * Simple Listener that allows you to be notified when the user has scrolled to the end of the AdapterView. See ( {@link PullToRefreshAdapterViewBase#setOnLastItemVisibleListener}.
-	 * 
+	 *
 	 * @author Chris Banes
 	 */
 	public interface OnLastItemVisibleListener {
@@ -1402,14 +1402,14 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
 
 	/**
 	 * Listener that allows you to be notified when the user has started or finished a touch event. Useful when you want to append extra UI events (such as sounds). See ( {@link PullToRefreshAdapterViewBase#setOnPullEventListener}.
-	 * 
+	 *
 	 * @author Chris Banes
 	 */
 	public interface OnPullEventListener<V extends View> {
 
 		/**
 		 * Called when the internal state has been changed, usually by the user pulling.
-		 * 
+		 *
 		 * @param refreshView
 		 *            - View which has had it's state change.
 		 * @param state
@@ -1423,7 +1423,7 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
 
 	/**
 	 * Simple Listener to listen for any callbacks to Refresh.
-	 * 
+	 *
 	 * @author Chris Banes
 	 */
 	public interface OnRefreshListener<V extends View> {
@@ -1437,7 +1437,7 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
 
 	/**
 	 * An advanced version of the Listener to listen for callbacks to Refresh. This listener is different as it allows you to differentiate between Pull Ups, and Pull Downs.
-	 * 
+	 *
 	 * @author Chris Banes
 	 */
 	public interface OnRefreshListener2<V extends View> {
@@ -1493,7 +1493,7 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
 
 		/**
 		 * Maps an int to a specific state. This is needed when saving state.
-		 * 
+		 *
 		 * @param stateInt
 		 *            - int to map a State to
 		 * @return State that stateInt maps to

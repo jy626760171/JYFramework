@@ -10,9 +10,7 @@ import com.jy.framework.utils.ColorGradient;
 import com.jy.framework.view.indicatorviewpager.indicator.Indicator;
 
 /**
- * 
  * @author LuckyJayce
- *
  */
 public class OnTransitionTextListener implements Indicator.OnTransitionListener {
 	private float selectSize = -1;
@@ -66,11 +64,9 @@ public class OnTransitionTextListener implements Indicator.OnTransitionListener 
 
 	/**
 	 * 如果tabItemView 不是目标的TextView，那么你可以重写该方法返回实际要变化的TextView
-	 * 
-	 * @param tabItemView
-	 *            Indicator的每一项的view
-	 * @param position
-	 *            view在Indicator的位置索引
+	 *
+	 * @param tabItemView Indicator的每一项的view
+	 * @param position    view在Indicator的位置索引
 	 * @return
 	 */
 	public TextView getTextView(View tabItemView, int position) {

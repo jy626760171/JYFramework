@@ -1,12 +1,12 @@
 package com.jy.framework.net.request;
 
-import java.io.File;
-import java.util.Map;
-
 import com.jy.framework.net.utils.Exceptions;
 import com.squareup.okhttp.MediaType;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.RequestBody;
+
+import java.io.File;
+import java.util.Map;
 
 /**
  * Created by zhy on 15/12/14.

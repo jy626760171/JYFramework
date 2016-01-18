@@ -1,7 +1,5 @@
 package com.jy.framework.base.fragment;
 
-import java.lang.reflect.Field;
-
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
@@ -16,6 +14,8 @@ import com.jy.framework.base.lifecycle.LifeCycleComponent;
 import com.jy.framework.base.lifecycle.LifeCycleComponentManager;
 import com.jy.framework.constant.GlobalConstant;
 import com.jy.framework.utils.LogUtil;
+
+import java.lang.reflect.Field;
 
 /**
  * Created by huzy on 2015/11/23.

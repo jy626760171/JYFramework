@@ -1,5 +1,7 @@
 package com.jy.framework.net.https;
 
+import com.squareup.okhttp.OkHttpClient;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.security.KeyManagementException;
@@ -19,8 +21,6 @@ import javax.net.ssl.TrustManager;
 import javax.net.ssl.TrustManagerFactory;
 import javax.net.ssl.X509TrustManager;
 
-import com.squareup.okhttp.OkHttpClient;
-
 /**
  * Created by zhy on 15/12/14.
  */
@@ -31,7 +31,7 @@ public class HttpsUtils {
 			KeyManager[] keyManagers = prepareKeyManager(bksFile, password);
 			SSLContext sslContext = SSLContext.getInstance("TLS");
 
-			sslContext.init(keyManagers, new TrustManager[] { new MyTrustManager(chooseTrustManager(trustManagers)) }, new SecureRandom());
+			sslContext.init(keyManagers, new TrustManager[]{new MyTrustManager(chooseTrustManager(trustManagers))}, new SecureRandom());
 			okHttpClient.setSslSocketFactory(sslContext.getSocketFactory());
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();

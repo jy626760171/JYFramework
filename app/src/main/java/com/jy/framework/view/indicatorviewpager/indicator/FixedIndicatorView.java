@@ -1,8 +1,5 @@
 package com.jy.framework.view.indicatorviewpager.indicator;
 
-import java.util.LinkedList;
-import java.util.List;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Canvas;
@@ -15,6 +12,9 @@ import android.widget.LinearLayout;
 import android.widget.Scroller;
 
 import com.jy.framework.view.indicatorviewpager.indicator.slidebar.ScrollBar;
+
+import java.util.LinkedList;
+import java.util.List;
 
 public class FixedIndicatorView extends LinearLayout implements Indicator {
 
@@ -216,28 +216,28 @@ public class FixedIndicatorView extends LinearLayout implements Indicator {
 		int paddingTop = getPaddingTop();
 		if (this.scrollBar != null) {
 			switch (this.scrollBar.getGravity()) {
-			case BOTTOM_FLOAT:
-				paddingBottom = paddingBottom - scrollBar.getHeight(getHeight());
-				break;
+				case BOTTOM_FLOAT:
+					paddingBottom = paddingBottom - scrollBar.getHeight(getHeight());
+					break;
 
-			case TOP_FLOAT:
-				paddingTop = paddingTop - scrollBar.getHeight(getHeight());
-				break;
-			default:
-				break;
+				case TOP_FLOAT:
+					paddingTop = paddingTop - scrollBar.getHeight(getHeight());
+					break;
+				default:
+					break;
 			}
 		}
 		this.scrollBar = scrollBar;
 		switch (this.scrollBar.getGravity()) {
-		case BOTTOM_FLOAT:
-			paddingBottom = paddingBottom + scrollBar.getHeight(getHeight());
-			break;
+			case BOTTOM_FLOAT:
+				paddingBottom = paddingBottom + scrollBar.getHeight(getHeight());
+				break;
 
-		case TOP_FLOAT:
-			paddingTop = paddingTop + scrollBar.getHeight(getHeight());
-			break;
-		default:
-			break;
+			case TOP_FLOAT:
+				paddingTop = paddingTop + scrollBar.getHeight(getHeight());
+				break;
+			default:
+				break;
 		}
 		setPadding(getPaddingLeft(), paddingTop, getPaddingRight(), paddingBottom);
 		// measureScrollBar(true);
@@ -329,19 +329,19 @@ public class FixedIndicatorView extends LinearLayout implements Indicator {
 		float offsetX = 0;
 		int offsetY = 0;
 		switch (this.scrollBar.getGravity()) {
-		case CENTENT_BACKGROUND:
-		case CENTENT:
-			offsetY = (getHeight() - scrollBar.getHeight(getHeight())) / 2;
-			break;
-		case TOP:
-		case TOP_FLOAT:
-			offsetY = 0;
-			break;
-		case BOTTOM:
-		case BOTTOM_FLOAT:
-		default:
-			offsetY = getHeight() - scrollBar.getHeight(getHeight());
-			break;
+			case CENTENT_BACKGROUND:
+			case CENTENT:
+				offsetY = (getHeight() - scrollBar.getHeight(getHeight())) / 2;
+				break;
+			case TOP:
+			case TOP_FLOAT:
+				offsetY = 0;
+				break;
+			case BOTTOM:
+			case BOTTOM_FLOAT:
+			default:
+				offsetY = getHeight() - scrollBar.getHeight(getHeight());
+				break;
 		}
 		View currentView = null;
 		if (!inRun.isFinished() && inRun.computeScrollOffset()) {
@@ -383,7 +383,7 @@ public class FixedIndicatorView extends LinearLayout implements Indicator {
 		canvas.restoreToCount(saveCount);
 	}
 
-	private int[] prePositions = { -1, -1 };
+	private int[] prePositions = {-1, -1};
 	private float positionOffset;
 
 	private void notifyPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -440,33 +440,33 @@ public class FixedIndicatorView extends LinearLayout implements Indicator {
 		// return;
 		// }
 		switch (splitMethod) {
-		case SPLITMETHOD_EQUALS:
-			for (int i = 0; i < count; i++) {
-				View view = getChildAt(i);
-				LayoutParams layoutParams = (LayoutParams) view.getLayoutParams();
-				layoutParams.width = 0;
-				layoutParams.weight = 1;
-				view.setLayoutParams(layoutParams);
-			}
-			break;
-		case SPLITMETHOD_WRAP:
-			for (int i = 0; i < count; i++) {
-				View view = getChildAt(i);
-				LayoutParams layoutParams = (LayoutParams) view.getLayoutParams();
-				layoutParams.width = LayoutParams.WRAP_CONTENT;
-				layoutParams.weight = 0;
-				view.setLayoutParams(layoutParams);
-			}
-			break;
-		case SPLITMETHOD_WEIGHT:
-			for (int i = 0; i < count; i++) {
-				View view = getChildAt(i);
-				LayoutParams layoutParams = (LayoutParams) view.getLayoutParams();
-				layoutParams.width = LayoutParams.WRAP_CONTENT;
-				layoutParams.weight = 1;
-				view.setLayoutParams(layoutParams);
-			}
-			break;
+			case SPLITMETHOD_EQUALS:
+				for (int i = 0; i < count; i++) {
+					View view = getChildAt(i);
+					LayoutParams layoutParams = (LayoutParams) view.getLayoutParams();
+					layoutParams.width = 0;
+					layoutParams.weight = 1;
+					view.setLayoutParams(layoutParams);
+				}
+				break;
+			case SPLITMETHOD_WRAP:
+				for (int i = 0; i < count; i++) {
+					View view = getChildAt(i);
+					LayoutParams layoutParams = (LayoutParams) view.getLayoutParams();
+					layoutParams.width = LayoutParams.WRAP_CONTENT;
+					layoutParams.weight = 0;
+					view.setLayoutParams(layoutParams);
+				}
+				break;
+			case SPLITMETHOD_WEIGHT:
+				for (int i = 0; i < count; i++) {
+					View view = getChildAt(i);
+					LayoutParams layoutParams = (LayoutParams) view.getLayoutParams();
+					layoutParams.width = LayoutParams.WRAP_CONTENT;
+					layoutParams.weight = 1;
+					view.setLayoutParams(layoutParams);
+				}
+				break;
 		}
 	}
 

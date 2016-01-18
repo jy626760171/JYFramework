@@ -24,9 +24,8 @@ import com.jy.framework.view.indicatorviewpager.indicator.Indicator;
 
 /**
  * tab的文本多宽scrollbar就显示多宽，实现新浪个人首页的tab的scrollbar效果
- * 
- * @author LuckyJayce
  *
+ * @author LuckyJayce
  */
 public class TextWidthColorBar extends ColorBar {
 	private Indicator indicator;
@@ -59,7 +58,7 @@ public class TextWidthColorBar extends ColorBar {
 
 	/**
 	 * 如果tab不是textView，可以通过重写该方法，返回tab里面的textView。
-	 * 
+	 *
 	 * @param position
 	 * @return
 	 */

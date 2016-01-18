@@ -1,12 +1,12 @@
 package com.jy.framework.net.request;
 
-import java.util.Map;
-
 import com.jy.framework.net.callback.Callback;
 import com.jy.framework.net.utils.Exceptions;
 import com.squareup.okhttp.Headers;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.RequestBody;
+
+import java.util.Map;
 
 /**
  * Created by zhy on 15/11/6.

@@ -1,10 +1,5 @@
 package com.jy.framework.net.request;
 
-import java.net.FileNameMap;
-import java.net.URLConnection;
-import java.util.List;
-import java.util.Map;
-
 import com.jy.framework.net.OkHttpUtils;
 import com.jy.framework.net.builder.PostFormBuilder;
 import com.jy.framework.net.callback.Callback;
@@ -14,6 +9,11 @@ import com.squareup.okhttp.MediaType;
 import com.squareup.okhttp.MultipartBuilder;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.RequestBody;
+
+import java.net.FileNameMap;
+import java.net.URLConnection;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by zhy on 15/12/14.

@@ -1,5 +1,8 @@
 package com.jy.framework.net.request;
 
+import com.squareup.okhttp.MediaType;
+import com.squareup.okhttp.RequestBody;
+
 import java.io.IOException;
 
 import okio.Buffer;
@@ -7,9 +10,6 @@ import okio.BufferedSink;
 import okio.ForwardingSink;
 import okio.Okio;
 import okio.Sink;
-
-import com.squareup.okhttp.MediaType;
-import com.squareup.okhttp.RequestBody;
 
 /**
  * Decorates an OkHttp request body to count the number of bytes written when writing it. Can decorate any request body, but is most useful for tracking the upload progress of large multipart requests.

@@ -1,12 +1,12 @@
 /*******************************************************************************
  * Copyright 2011, 2012 Chris Banes.
- *
+ * <p/>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ * <p/>
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p/>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -116,22 +116,22 @@ public class FlipLoadingLayout extends LoadingLayout {
 	private float getDrawableRotationAngle() {
 		float angle = 0f;
 		switch (mMode) {
-		case PULL_FROM_END:
-			if (mScrollDirection == PullToRefreshBase.Orientation.HORIZONTAL) {
-				angle = 90f;
-			} else {
-				angle = 180f;
-			}
-			break;
+			case PULL_FROM_END:
+				if (mScrollDirection == PullToRefreshBase.Orientation.HORIZONTAL) {
+					angle = 90f;
+				} else {
+					angle = 180f;
+				}
+				break;
 
-		case PULL_FROM_START:
-			if (mScrollDirection == PullToRefreshBase.Orientation.HORIZONTAL) {
-				angle = 270f;
-			}
-			break;
+			case PULL_FROM_START:
+				if (mScrollDirection == PullToRefreshBase.Orientation.HORIZONTAL) {
+					angle = 270f;
+				}
+				break;
 
-		default:
-			break;
+			default:
+				break;
 		}
 
 		return angle;

@@ -1,9 +1,9 @@
 package com.jy.framework.net.callback;
 
-import java.io.IOException;
-
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
+
+import java.io.IOException;
 
 public abstract class Callback<T> {
 	/**

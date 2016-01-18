@@ -4,10 +4,9 @@ import android.content.Context;
 import android.view.View;
 
 /**
- * 
+ * @version 1.0 通过颜色来设置滑动块
  * @author试着飞
  * @date 2014年11月2日
- * @version 1.0 通过颜色来设置滑动块
  */
 public class ColorBar implements ScrollBar {
 	protected Gravity gravity;

@@ -1,12 +1,12 @@
 /*******************************************************************************
  * Copyright 2011, 2012 Chris Banes.
- *
+ * <p/>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ * <p/>
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p/>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -120,22 +120,22 @@ public class PullToRefreshListView extends PullToRefreshAdapterViewBase<ListView
 		final int selection, scrollToY;
 
 		switch (getCurrentMode()) {
-		case MANUAL_REFRESH_ONLY:
-		case PULL_FROM_END:
-			origLoadingView = getFooterLayout();
-			listViewLoadingView = mFooterLoadingView;
-			oppositeListViewLoadingView = mHeaderLoadingView;
-			selection = mRefreshableView.getCount() - 1;
-			scrollToY = getScrollY() - getFooterSize();
-			break;
-		case PULL_FROM_START:
-		default:
-			origLoadingView = getHeaderLayout();
-			listViewLoadingView = mHeaderLoadingView;
-			oppositeListViewLoadingView = mFooterLoadingView;
-			selection = 0;
-			scrollToY = getScrollY() + getHeaderSize();
-			break;
+			case MANUAL_REFRESH_ONLY:
+			case PULL_FROM_END:
+				origLoadingView = getFooterLayout();
+				listViewLoadingView = mFooterLoadingView;
+				oppositeListViewLoadingView = mHeaderLoadingView;
+				selection = mRefreshableView.getCount() - 1;
+				scrollToY = getScrollY() - getFooterSize();
+				break;
+			case PULL_FROM_START:
+			default:
+				origLoadingView = getHeaderLayout();
+				listViewLoadingView = mHeaderLoadingView;
+				oppositeListViewLoadingView = mFooterLoadingView;
+				selection = 0;
+				scrollToY = getScrollY() + getHeaderSize();
+				break;
 		}
 
 		// Hide our original Loading View
@@ -179,15 +179,15 @@ public class PullToRefreshListView extends PullToRefreshAdapterViewBase<ListView
 		@Override
 		public void run() {
 			switch (getCurrentMode()) {
-			case MANUAL_REFRESH_ONLY:
-			case PULL_FROM_END:
-				failToLoad();
-				onRefreshComplete();
-				break;
+				case MANUAL_REFRESH_ONLY:
+				case PULL_FROM_END:
+					failToLoad();
+					onRefreshComplete();
+					break;
 
-			case PULL_FROM_START:
-				onRefreshComplete();
-				break;
+				case PULL_FROM_START:
+					onRefreshComplete();
+					break;
 			}
 
 		}
@@ -208,41 +208,14 @@ public class PullToRefreshListView extends PullToRefreshAdapterViewBase<ListView
 		final boolean scrollLvToEdge;
 
 		switch (getCurrentMode()) {
-		case MANUAL_REFRESH_ONLY:
-		case PULL_FROM_END:
-			selection = mRefreshableView.getCount() - 1;
-			scrollToHeight = getFooterSize();
-			scrollLvToEdge = Math.abs(mRefreshableView.getLastVisiblePosition() - selection) <= 1;
-			originalLoadingLayout = getFooterLayout();
-			// Set our Original View to Visible
-			originalLoadingLayout.showInvisibleViews();
-			/**
-			 * Scroll so the View is at the same Y as the ListView header/footer, but only scroll if: we've pulled to refresh, it's positioned correctly
-			 */
-			if (scrollLvToEdge && getState() != State.MANUAL_REFRESHING) {
-				mRefreshableView.setSelection(selection);
-				setHeaderScroll(scrollToHeight);
-			}
-
-			break;
-		case PULL_FROM_START:
-		default:
-			originalLoadingLayout = getHeaderLayout();
-			listViewLoadingLayout = mHeaderLoadingView;
-			scrollToHeight = -getHeaderSize();
-			selection = 0;
-			scrollLvToEdge = Math.abs(mRefreshableView.getFirstVisiblePosition() - selection) <= 1;
-
-			// If the ListView header loading layout is showing, then we need to
-			// flip so that the original one is showing instead
-			if (listViewLoadingLayout.getVisibility() == View.VISIBLE) {
-
+			case MANUAL_REFRESH_ONLY:
+			case PULL_FROM_END:
+				selection = mRefreshableView.getCount() - 1;
+				scrollToHeight = getFooterSize();
+				scrollLvToEdge = Math.abs(mRefreshableView.getLastVisiblePosition() - selection) <= 1;
+				originalLoadingLayout = getFooterLayout();
 				// Set our Original View to Visible
 				originalLoadingLayout.showInvisibleViews();
-
-				// Hide the ListView Header/Footer
-				listViewLoadingLayout.setVisibility(View.GONE);
-
 				/**
 				 * Scroll so the View is at the same Y as the ListView header/footer, but only scroll if: we've pulled to refresh, it's positioned correctly
 				 */
@@ -250,8 +223,35 @@ public class PullToRefreshListView extends PullToRefreshAdapterViewBase<ListView
 					mRefreshableView.setSelection(selection);
 					setHeaderScroll(scrollToHeight);
 				}
-			}
-			break;
+
+				break;
+			case PULL_FROM_START:
+			default:
+				originalLoadingLayout = getHeaderLayout();
+				listViewLoadingLayout = mHeaderLoadingView;
+				scrollToHeight = -getHeaderSize();
+				selection = 0;
+				scrollLvToEdge = Math.abs(mRefreshableView.getFirstVisiblePosition() - selection) <= 1;
+
+				// If the ListView header loading layout is showing, then we need to
+				// flip so that the original one is showing instead
+				if (listViewLoadingLayout.getVisibility() == View.VISIBLE) {
+
+					// Set our Original View to Visible
+					originalLoadingLayout.showInvisibleViews();
+
+					// Hide the ListView Header/Footer
+					listViewLoadingLayout.setVisibility(View.GONE);
+
+					/**
+					 * Scroll so the View is at the same Y as the ListView header/footer, but only scroll if: we've pulled to refresh, it's positioned correctly
+					 */
+					if (scrollLvToEdge && getState() != State.MANUAL_REFRESHING) {
+						mRefreshableView.setSelection(selection);
+						setHeaderScroll(scrollToHeight);
+					}
+				}
+				break;
 		}
 
 		// Finally, call up to super
@@ -354,7 +354,7 @@ public class PullToRefreshListView extends PullToRefreshAdapterViewBase<ListView
 
 		@Override
 		protected boolean overScrollBy(int deltaX, int deltaY, int scrollX, int scrollY, int scrollRangeX, int scrollRangeY, int maxOverScrollX,
-				int maxOverScrollY, boolean isTouchEvent) {
+									   int maxOverScrollY, boolean isTouchEvent) {
 
 			final boolean returnValue = super.overScrollBy(deltaX, deltaY, scrollX, scrollY, scrollRangeX, scrollRangeY, maxOverScrollX, maxOverScrollY,
 					isTouchEvent);

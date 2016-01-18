@@ -60,7 +60,7 @@ public class DashLine extends View {
 		mPaint.setColor(dashColor);
 		mPaint.setStrokeWidth(dashStrokenWidth);
 		linePath = new Path();
-		float[] arrayOfFloat = { dashWidth, dashGap, dashWidth, dashGap };
+		float[] arrayOfFloat = {dashWidth, dashGap, dashWidth, dashGap};
 		linePathEffect = new DashPathEffect(arrayOfFloat, 1f);
 	}
 
@@ -69,14 +69,14 @@ public class DashLine extends View {
 		super.onDraw(canvas);
 
 		switch (dashOrientation) {
-		case horizontal:
-			linePath.moveTo(0.0f, 0.0f);
-			linePath.lineTo(getWidth(), 0.0f);
-			break;
-		case vertical:
-			linePath.moveTo(0.0f, 0.0f);
-			linePath.lineTo(0.0f, getHeight());
-			break;
+			case horizontal:
+				linePath.moveTo(0.0f, 0.0f);
+				linePath.lineTo(getWidth(), 0.0f);
+				break;
+			case vertical:
+				linePath.moveTo(0.0f, 0.0f);
+				linePath.lineTo(0.0f, getHeight());
+				break;
 		}
 
 		mPaint.setPathEffect(linePathEffect);

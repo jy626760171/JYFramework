@@ -1,14 +1,14 @@
 package com.jy.framework.net.request;
 
-import java.io.IOException;
-import java.util.concurrent.TimeUnit;
-
 import com.jy.framework.net.OkHttpUtils;
 import com.jy.framework.net.callback.Callback;
 import com.squareup.okhttp.Call;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
+
+import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by zhy on 15/12/15.

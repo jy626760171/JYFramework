@@ -1,12 +1,12 @@
 /*******************************************************************************
  * Copyright 2011, 2012 Chris Banes.
- *
+ * <p/>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ * <p/>
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p/>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -55,23 +55,23 @@ public class IndicatorLayout extends FrameLayout implements AnimationListener {
 
 		int inAnimResId, outAnimResId;
 		switch (mode) {
-		case PULL_FROM_END:
-			inAnimResId = R.anim.slide_in_from_bottom;
-			outAnimResId = R.anim.slide_out_to_bottom;
-			setBackgroundResource(R.drawable.indicator_bg_bottom);
+			case PULL_FROM_END:
+				inAnimResId = R.anim.slide_in_from_bottom;
+				outAnimResId = R.anim.slide_out_to_bottom;
+				setBackgroundResource(R.drawable.indicator_bg_bottom);
 
-			// Rotate Arrow so it's pointing the correct way
-			mArrowImageView.setScaleType(ScaleType.MATRIX);
-			Matrix matrix = new Matrix();
-			matrix.setRotate(180f, arrowD.getIntrinsicWidth() / 2f, arrowD.getIntrinsicHeight() / 2f);
-			mArrowImageView.setImageMatrix(matrix);
-			break;
-		default:
-		case PULL_FROM_START:
-			inAnimResId = R.anim.slide_in_from_top;
-			outAnimResId = R.anim.slide_out_to_top;
-			setBackgroundResource(R.drawable.indicator_bg_top);
-			break;
+				// Rotate Arrow so it's pointing the correct way
+				mArrowImageView.setScaleType(ScaleType.MATRIX);
+				Matrix matrix = new Matrix();
+				matrix.setRotate(180f, arrowD.getIntrinsicWidth() / 2f, arrowD.getIntrinsicHeight() / 2f);
+				mArrowImageView.setImageMatrix(matrix);
+				break;
+			default:
+			case PULL_FROM_START:
+				inAnimResId = R.anim.slide_in_from_top;
+				outAnimResId = R.anim.slide_out_to_top;
+				setBackgroundResource(R.drawable.indicator_bg_top);
+				break;
 		}
 
 		mInAnim = AnimationUtils.loadAnimation(context, inAnimResId);

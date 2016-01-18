@@ -5,17 +5,17 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.text.TextUtils;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Toast;
 
+import com.jy.framework.R;
 import com.jy.framework.base.fragment.FragmentParam;
 import com.jy.framework.base.fragment.LazyFragment;
 import com.jy.framework.constant.GlobalConstant;
 import com.jy.framework.utils.LogUtil;
+import com.jy.framework.utils.ToastUtils;
 
 public abstract class SmartFragmentActivity extends FragmentActivity {
 
@@ -23,16 +23,6 @@ public abstract class SmartFragmentActivity extends FragmentActivity {
 
 	public static boolean DEBUG = GlobalConstant.DEBUG;
 	protected LazyFragment mCurrentFragment;
-	private boolean mCloseWarned;
-
-	/**
-	 * return the string id of close warning
-	 * <p/>
-	 * return value which lower than 1 will exit instantly when press back key
-	 *
-	 * @return
-	 */
-	protected abstract String getCloseWarning();
 
 	protected abstract int getFragmentContainerId();
 
@@ -90,7 +80,6 @@ public abstract class SmartFragmentActivity extends FragmentActivity {
 		} catch (IllegalAccessException e) {
 			e.printStackTrace();
 		}
-		mCloseWarned = false;
 	}
 
 	public void goToFragment(Class<?> cls, Object data) {
@@ -130,6 +119,23 @@ public abstract class SmartFragmentActivity extends FragmentActivity {
 		return false;
 	}
 
+	protected boolean enableDefaultBack() {
+		return true;
+	}
+
+	/**
+	 * 用于记录第一次按下back键
+	 */
+	private long mLastTimemillions = 0;
+
+	/**
+	 * 当前页面是最终退出程序的界面，必须重写该方法
+	 * @return
+	 */
+	protected boolean enableExitApp() {
+		return false;
+	}
+
 	/**
 	 * process back pressed
 	 */
@@ -142,23 +148,26 @@ public abstract class SmartFragmentActivity extends FragmentActivity {
 		}
 
 		// process back for fragment
-		boolean enableBackPressed = true;
+		boolean enableBackPressed = enableDefaultBack();
+
 		if (mCurrentFragment != null) {
 			enableBackPressed = !mCurrentFragment.processBackPressed();
 		}
 		if (enableBackPressed) {
-			int cnt = getSupportFragmentManager().getBackStackEntryCount();
-			if (cnt <= 1 && isTaskRoot()) {
-				String closeWarningHint = getCloseWarning();
-				if (!mCloseWarned && !TextUtils.isEmpty(closeWarningHint)) {
-					Toast toast = Toast.makeText(this, closeWarningHint, Toast.LENGTH_SHORT);
-					toast.show();
-					mCloseWarned = true;
+			if (enableExitApp()) {
+				if (mLastTimemillions == 0) {
+					mLastTimemillions = System.currentTimeMillis();
+					ToastUtils.showLongToast(R.string.exit_app_tip);
 				} else {
-					doReturnBack();
+					long currentTimemillions = System.currentTimeMillis();
+					if (currentTimemillions - mLastTimemillions <= 1000) {
+						ToastUtils.cancleToast();
+						doReturnBack();
+					}else{
+						mLastTimemillions = 0;
+					}
 				}
 			} else {
-				mCloseWarned = false;
 				doReturnBack();
 			}
 		}

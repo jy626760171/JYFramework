@@ -1,9 +1,9 @@
 package com.jy.framework.net.request;
 
-import java.util.Map;
-
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.RequestBody;
+
+import java.util.Map;
 
 /**
  * Created by zhy on 15/12/14.

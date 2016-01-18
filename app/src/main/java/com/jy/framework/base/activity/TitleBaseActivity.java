@@ -14,7 +14,7 @@ import com.jy.framework.view.BaseTitleBar;
 import com.jy.framework.view.BaseTitleBar.OnLeftRightClickListener;
 import com.jy.framework.view.CustomLoading;
 
-public abstract class TitleBaseActivity extends BaseActivity implements OnLeftRightClickListener{
+public abstract class TitleBaseActivity extends BaseActivity implements OnLeftRightClickListener {
 
 	private BaseTitleBar mTitleBar;
 	private FrameLayout mContentContainer;
@@ -31,17 +31,13 @@ public abstract class TitleBaseActivity extends BaseActivity implements OnLeftRi
 		mTitleBar = (BaseTitleBar) findViewById(R.id.activity_frame_title_bar);
 		if (enableTitleBar()) {
 			mTitleBar.setOnLeftRightClickListener(this);
-			if(!enableDefaultBack()) mTitleBar.mLeftContainer.setVisibility(View.GONE);
+			if (!enableDefaultBack()) mTitleBar.mLeftContainer.setVisibility(View.GONE);
 		} else {
 			mTitleBar.setVisibility(View.GONE);
 		}
 	}
 
 	protected boolean enableTitleBar() {
-		return true;
-	}
-
-	protected boolean enableDefaultBack() {
 		return true;
 	}
 
@@ -93,7 +89,7 @@ public abstract class TitleBaseActivity extends BaseActivity implements OnLeftRi
 		if (event.getAction() == KeyEvent.ACTION_DOWN) {
 			switch (event.getKeyCode()) {
 				case KeyEvent.KEYCODE_BACK:
-					finish();
+					onLeftClick();
 					return true;
 			}
 		}
@@ -114,10 +110,13 @@ public abstract class TitleBaseActivity extends BaseActivity implements OnLeftRi
 	}
 
 	@Override
+	protected boolean enableExitApp() {
+		return true;
+	}
+
+	@Override
 	public void onLeftClick() {
-		if (!processBackPressed()) {
-			doReturnBack();
-		}
+		onBackPressed();
 	}
 
 	@Override

@@ -1,13 +1,13 @@
 package com.jy.framework.net.callback;
 
+import com.jy.framework.net.OkHttpUtils;
+import com.jy.framework.net.utils.L;
+import com.squareup.okhttp.Response;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-
-import com.jy.framework.net.OkHttpUtils;
-import com.jy.framework.net.utils.L;
-import com.squareup.okhttp.Response;
 
 /**
  * Created by zhy on 15/12/15.

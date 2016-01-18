@@ -1,13 +1,13 @@
 package com.jy.framework.net.utils;
 
-import java.io.InputStream;
-import java.lang.reflect.Field;
-
 import android.graphics.BitmapFactory;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+
+import java.io.InputStream;
+import java.lang.reflect.Field;
 
 /**
  * Created by zhy on 15/11/6.

@@ -139,15 +139,16 @@ public class OvalProgressView extends View {
 
 		switch (style) {
 
-		case STROKE:
-			mPaint.setStyle(Paint.Style.STROKE);
-			canvas.drawArc(oval, -90, 360 * progress / max, false, mPaint); // 根据进度画圆弧
-			break;
+			case STROKE:
+				mPaint.setStyle(Paint.Style.STROKE);
+				canvas.drawArc(oval, -90, 360 * progress / max, false, mPaint); // 根据进度画圆弧
+				break;
 
-		case FILL:
-			mPaint.setStyle(Paint.Style.FILL_AND_STROKE);
-			if (progress >= 0) canvas.drawArc(oval, -90, 360 * progress / max, true, mPaint); // 根据进度画圆弧
-			break;
+			case FILL:
+				mPaint.setStyle(Paint.Style.FILL_AND_STROKE);
+				if (progress >= 0)
+					canvas.drawArc(oval, -90, 360 * progress / max, true, mPaint); // 根据进度画圆弧
+				break;
 
 		}
 

@@ -1,8 +1,8 @@
 package com.jy.framework.net.builder;
 
-import java.util.Map;
-
 import com.jy.framework.net.request.RequestCall;
+
+import java.util.Map;
 
 /**
  * Created by zhy on 15/12/14.

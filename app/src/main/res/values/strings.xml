@@ -4,9 +4,9 @@
     <string name="app_name">JYFramework</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-	<!--退出应用-->
+    <!--退出应用-->
 
-    <string name="mints_exit_tip">再按一次，退出程序</string>
+    <string name="exit_app_tip">再按一次，退出程序</string>
     <!--下拉刷新，上拉加载-->
     <string name="pull_to_refresh_pull_label">下拉刷新</string>
     <string name="pull_to_refresh_release_label">释放更新</string>

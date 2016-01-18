@@ -1,12 +1,12 @@
 package com.jy.framework.view.indicatorviewpager.indicator;
 
-import java.util.LinkedHashSet;
-import java.util.Set;
-
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.jy.framework.view.indicatorviewpager.indicator.slidebar.ScrollBar;
+
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 public interface Indicator {
 	/**
@@ -42,7 +42,7 @@ public interface Indicator {
 	 * 设置滑动块<br>
 	 * 设置它可以自定义滑动块的样式。<br>
 	 * 目前提供的子类 {@link com.ymdai2345.base.view.indicatorviewpager.indicator.slidebar.ColorBar} {@link com.ymdai2345.base.view.indicatorviewpager.indicator.slidebar.DrawableBar} {@link com.ymdai2345.base.view.indicatorviewpager.indicator.slidebar.LayoutBar}
-	 * 
+	 *
 	 * @param scrollBar
 	 */
 	public void setScrollBar(ScrollBar scrollBar);
@@ -62,8 +62,7 @@ public interface Indicator {
 	/**
 	 * 获取每一项的tab
 	 *
-	 * @param item
-	 *            索引
+	 * @param item 索引
 	 * @return
 	 */
 	public View getItemView(int item);
@@ -131,12 +130,9 @@ public interface Indicator {
 		/**
 		 * 注意 preItem 可能为 -1。表示之前没有选中过,每次adapter.notifyDataSetChanged也会将preItem 设置为-1；
 		 *
-		 * @param selectItemView
-		 *            当前选中的view
-		 * @param select
-		 *            当前选中项的索引
-		 * @param preSelect
-		 *            之前选中项的索引
+		 * @param selectItemView 当前选中的view
+		 * @param select         当前选中项的索引
+		 * @param preSelect      之前选中项的索引
 		 */
 		public void onItemSelected(View selectItemView, int select, int preSelect);
 	}
