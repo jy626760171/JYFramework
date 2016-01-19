@@ -18,9 +18,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 
-import com.jy.framework.JYApplication;
-
-public class PreferenceUtils {
+public class PreferenceUtils extends BaseUtils{
 
 	/**
 	 * 用户登录成功后，服务器端返回的cookie，用来验证用户是否已经登录了.
@@ -44,7 +42,7 @@ public class PreferenceUtils {
 		if (sharedPreferences == null) {
 			synchronized (PreferenceUtils.class) {
 				if (sharedPreferences == null) {
-					sharedPreferences = JYApplication.getInstance().getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
+					sharedPreferences = sContext.getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
 				}
 			}
 		}

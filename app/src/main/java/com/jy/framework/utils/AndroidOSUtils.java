@@ -1,13 +1,5 @@
 package com.jy.framework.utils;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
-import java.lang.reflect.Method;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.List;
-
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.ActivityManager.RunningAppProcessInfo;
@@ -31,58 +23,60 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 
-import com.jy.framework.JYApplication;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Method;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.List;
 
-public class AndroidOSUtils {
+public class AndroidOSUtils extends BaseUtils{
 	// private static final String TAG = "AndroidOSUtils";
 
-	private static int sOsWidth = -1;
-
-	private static int sOsHeight = -1;
-
-	private static DisplayMetrics sDisplayMetrics;
-
-	private static DisplayMetrics getDisplayMetrics() {
-		if (sDisplayMetrics == null) {
-			synchronized (AndroidOSUtils.class) {
-				if (sDisplayMetrics == null) {
-					sDisplayMetrics = JYApplication.getInstance().getResources().getDisplayMetrics();
-				}
-			}
-		}
-		return sDisplayMetrics;
+	public static DisplayMetrics getDisplayMetrics() {
+		WindowManager wm = (WindowManager) sContext.getSystemService(Context.WINDOW_SERVICE);
+		DisplayMetrics dm = new DisplayMetrics();
+		wm.getDefaultDisplay().getMetrics(dm);
+		return dm;
 	}
 
-	private static void initOsHeight() {
-		if (sOsHeight <= 0) {
-			synchronized (AndroidOSUtils.class) {
-				if (sOsHeight <= 0) {
-					sOsHeight = getDisplayMetrics().heightPixels;
-				}
-			}
-		}
+	public static final int VIEW_WIDTH = 0;
+	public static final int VIEW_HEIGHT = 1;
+	/**
+	 * 在onCreate的时候获取宽度高度,但不一定准确
+	 * @param view
+	 * @param type {@link #VIEW_WIDTH} {@link #VIEW_HEIGHT}
+	 * @return
+	 */
+	public static int getViewWH(View view, int type){
+		int w = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
+		int h = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
+		view.measure(w, h);
+		int length = 0;
+		if(type == VIEW_WIDTH)
+			length = view.getMeasuredWidth();
+		else
+			length = view.getMeasuredHeight();
+		return length;
 	}
 
-	private static void initOSWidth() {
-		if (sOsWidth <= 0) {
-			synchronized (AndroidOSUtils.class) {
-				if (sOsWidth <= 0) {
-					sOsWidth = getDisplayMetrics().widthPixels;
-				}
-			}
-		}
-	}
-
-	public static int getDisplayHeight() {
-		initOsHeight();
-		initOSWidth();
-		return Math.max(sOsWidth, sOsHeight);
-	}
-
-	public static int getDisplayWidth() {
-		initOSWidth();
-		initOsHeight();
-		return Math.min(sOsWidth, sOsHeight);
+	/**
+	 * 获取屏幕分辨率
+	 * @param context
+	 * @param type {@link #VIEW_WIDTH} {@link #VIEW_HEIGHT}
+	 * @return
+	 */
+	public static int getScreenWH(Context context, int type){
+		WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+		DisplayMetrics dm = new DisplayMetrics();
+		wm.getDefaultDisplay().getMetrics(dm);
+		int length = 0;
+		if(type == VIEW_WIDTH)
+			length = dm.widthPixels;
+		else
+			length = dm.heightPixels;
+		return length;
 	}
 
 	public static int dip2Pix(float dip) {
@@ -93,12 +87,8 @@ public class AndroidOSUtils {
 		return (int) (width * radio);
 	}
 
-	public static void clear() {
-		sDisplayMetrics = null;
-	}
-
 	public static String getMEID() {
-		return ((TelephonyManager) JYApplication.getInstance().getSystemService(Context.TELEPHONY_SERVICE)).getDeviceId();
+		return ((TelephonyManager) sContext.getSystemService(Context.TELEPHONY_SERVICE)).getDeviceId();
 	}
 
 	public static int getAppVersion() {
@@ -114,8 +104,8 @@ public class AndroidOSUtils {
 
 	public static final PackageInfo getPackageInfo() {
 		try {
-			PackageManager pm = JYApplication.getInstance().getPackageManager();
-			String pn = JYApplication.getInstance().getPackageName();
+			PackageManager pm = sContext.getPackageManager();
+			String pn = sContext.getPackageName();
 			return pm.getPackageInfo(pn, 0);
 		} catch (NameNotFoundException e) {
 		}
@@ -131,7 +121,7 @@ public class AndroidOSUtils {
 	}
 
 	public static final Resources getResources() {
-		return JYApplication.getInstance().getResources();
+		return sContext.getResources();
 	}
 
 	public static Drawable getResourceDrawable(Context context, int id) {
@@ -170,7 +160,7 @@ public class AndroidOSUtils {
 		options.inTargetDensity = AndroidOSUtils.getDispalyDensityDpi();
 		InputStream is = null;
 		try {
-			is = JYApplication.getInstance().getResources().openRawResource(id);
+			is = sContext.getResources().openRawResource(id);
 			return BitmapFactory.decodeStream(is, null, options);
 		} finally {
 			if (is != null) {

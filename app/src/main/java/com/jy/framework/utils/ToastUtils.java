@@ -7,25 +7,16 @@ import android.view.LayoutInflater;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.jy.framework.JYApplication;
 import com.jy.framework.R;
 
-public class ToastUtils {
+public class ToastUtils extends BaseUtils{
 
 	private static final int DISTANCE_BOTTOM = AndroidOSUtils.dip2Pix(80);
 	private static final Handler sHandler = new Handler(Looper.getMainLooper());
 	private static Toast sToast = null;
 	private static ShowRunnable showRunnable = new ShowRunnable();
 	private static Object sLock = new Object();
-	private static Runnable sCancleRunnable = new Runnable() {
-
-		@Override
-		public void run() {
-			synchronized (sLock) {
-				cancle();
-			}
-		}
-	};
+	private static CancleRunnable sCancleRunnable = new CancleRunnable();
 
 	public static void showLongToast(int resId) {
 		showToast(resId, Toast.LENGTH_LONG);
@@ -44,7 +35,7 @@ public class ToastUtils {
 	}
 
 	private static void showToast(int resId, int duration) {
-		String text = JYApplication.getInstance().getResources().getString(resId);
+		String text = sContext.getResources().getString(resId);
 		showToast(text, duration);
 	}
 
@@ -86,13 +77,22 @@ public class ToastUtils {
 		}
 
 		private void show() {
-			sToast = new Toast(JYApplication.getInstance());
-			TextView tv = (TextView) LayoutInflater.from(JYApplication.getInstance()).inflate(R.layout.layout_toast, null);
+			sToast = new Toast(sContext);
+			TextView tv = (TextView) LayoutInflater.from(sContext).inflate(R.layout.layout_toast, null);
 			tv.setText(message);
 			sToast.setView(tv);
 			sToast.setGravity(Gravity.BOTTOM, 0, DISTANCE_BOTTOM);
 			sToast.setDuration(duration);
 			sToast.show();
+		}
+	}
+
+	private static class CancleRunnable implements Runnable{
+		@Override
+		public void run() {
+			synchronized (sLock) {
+				cancle();
+			}
 		}
 	}
 }
