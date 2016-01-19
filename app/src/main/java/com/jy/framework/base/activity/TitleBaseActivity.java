@@ -16,7 +16,7 @@ import com.jy.framework.view.CustomLoading;
 
 public abstract class TitleBaseActivity extends BaseActivity implements OnLeftRightClickListener {
 
-	private BaseTitleBar mTitleBar;
+	protected BaseTitleBar mTitleBar;
 	private FrameLayout mContentContainer;
 
 	@Override
@@ -107,11 +107,6 @@ public abstract class TitleBaseActivity extends BaseActivity implements OnLeftRi
 		progressBar.setLayoutParams(locLayoutParams);
 
 		return progressBar;
-	}
-
-	@Override
-	protected boolean enableExitApp() {
-		return true;
 	}
 
 	@Override
