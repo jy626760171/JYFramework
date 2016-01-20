@@ -160,7 +160,7 @@ public abstract class SmartFragmentActivity extends FragmentActivity {
 					ToastUtils.showLongToast(R.string.exit_app_tip);
 				} else {
 					long currentTimemillions = System.currentTimeMillis();
-					if (currentTimemillions - mLastTimemillions <= 1000) {
+					if (currentTimemillions - mLastTimemillions <= 1500) {
 						ToastUtils.cancleToast();
 						doReturnBack();
 					}else{

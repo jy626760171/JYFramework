@@ -17,4 +17,8 @@ public class MainActivity extends TitleBaseActivity {
 		mTitleBar.mRightContainer.setVisibility(View.GONE);
 	}
 
+	@Override
+	protected boolean enableExitApp() {
+		return true;
+	}
 }

@@ -63,12 +63,11 @@ public class AndroidOSUtils extends BaseUtils{
 
 	/**
 	 * 获取屏幕分辨率
-	 * @param context
 	 * @param type {@link #VIEW_WIDTH} {@link #VIEW_HEIGHT}
 	 * @return
 	 */
-	public static int getScreenWH(Context context, int type){
-		WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+	public static int getScreenWH(int type){
+		WindowManager wm = (WindowManager) sContext.getSystemService(Context.WINDOW_SERVICE);
 		DisplayMetrics dm = new DisplayMetrics();
 		wm.getDefaultDisplay().getMetrics(dm);
 		int length = 0;
@@ -98,7 +97,7 @@ public class AndroidOSUtils extends BaseUtils{
 
 	}
 
-	public static int getDispalyDensityDpi() {
+	public static int getDisplayDensityDpi() {
 		return getDisplayMetrics().densityDpi;
 	}
 
@@ -156,8 +155,8 @@ public class AndroidOSUtils extends BaseUtils{
 		options.inInputShareable = true;
 		options.inDither = false;
 		options.inPreferredConfig = null;
-		options.inScreenDensity = AndroidOSUtils.getDispalyDensityDpi();
-		options.inTargetDensity = AndroidOSUtils.getDispalyDensityDpi();
+		options.inScreenDensity = AndroidOSUtils.getDisplayDensityDpi();
+		options.inTargetDensity = AndroidOSUtils.getDisplayDensityDpi();
 		InputStream is = null;
 		try {
 			is = sContext.getResources().openRawResource(id);
