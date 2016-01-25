@@ -41,7 +41,7 @@ public interface Indicator {
 	/**
 	 * 设置滑动块<br>
 	 * 设置它可以自定义滑动块的样式。<br>
-	 * 目前提供的子类 {@link com.ymdai2345.base.view.indicatorviewpager.indicator.slidebar.ColorBar} {@link com.ymdai2345.base.view.indicatorviewpager.indicator.slidebar.DrawableBar} {@link com.ymdai2345.base.view.indicatorviewpager.indicator.slidebar.LayoutBar}
+	 * 目前提供的子类 {@link com.jy.framework.view.indicatorviewpager.indicator.slidebar.ColorBar} {@link com.jy.framework.view.indicatorviewpager.indicator.slidebar.DrawableBar} {@link com.jy.framework.view.indicatorviewpager.indicator.slidebar.LayoutBar}
 	 *
 	 * @param scrollBar
 	 */

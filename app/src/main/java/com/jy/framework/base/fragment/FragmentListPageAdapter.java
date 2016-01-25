@@ -23,9 +23,10 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.PagerAdapter;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.jy.framework.utils.LogUtil;
 
 import java.util.ArrayList;
 
@@ -110,7 +111,7 @@ public abstract class FragmentListPageAdapter extends PagerAdapter {
 		}
 
 		Fragment fragment = getItem(position);
-		if (DEBUG) Log.v(TAG, "Adding item #" + position + ": f=" + fragment);
+		if (DEBUG) LogUtil.v(TAG, "Adding item #" + position + ": f=" + fragment);
 		if (mSavedState.size() > position) {
 			Fragment.SavedState fss = mSavedState.get(position);
 			if (fss != null) {
@@ -136,7 +137,7 @@ public abstract class FragmentListPageAdapter extends PagerAdapter {
 			mCurTransaction = mFragmentManager.beginTransaction();
 		}
 		if (DEBUG)
-			Log.v(TAG, "Removing item #" + position + ": f=" + object + " v=" + ((Fragment) object).getView());
+			LogUtil.v(TAG, "Removing item #" + position + ": f=" + object + " v=" + ((Fragment) object).getView());
 		while (mSavedState.size() <= position) {
 			mSavedState.add(null);
 		}
@@ -223,7 +224,7 @@ public abstract class FragmentListPageAdapter extends PagerAdapter {
 						f.setMenuVisibility(false);
 						mFragments.set(index, f);
 					} else {
-						Log.w(TAG, "Bad fragment at key " + key);
+						LogUtil.w(TAG, "Bad fragment at key " + key);
 					}
 				}
 			}

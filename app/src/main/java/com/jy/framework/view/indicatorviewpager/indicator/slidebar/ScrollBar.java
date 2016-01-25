@@ -67,10 +67,9 @@ public interface ScrollBar {
 	/**
 	 * 当page滑动的时候调用
 	 *
-	 * @param selectView
-	 * @param unSelectView
 	 * @param position
 	 * @param positionOffset
+	 * @param positionOffsetPixels
 	 */
 	public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels);
 }
