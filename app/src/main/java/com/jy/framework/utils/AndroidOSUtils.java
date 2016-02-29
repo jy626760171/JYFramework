@@ -17,6 +17,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.telephony.TelephonyManager;
 import android.util.DisplayMetrics;
+import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.Window;
@@ -81,6 +82,13 @@ public class AndroidOSUtils extends BaseUtils{
 
 	public static int dip2Pix(float dip) {
 		return ((int) (dip * getDisplayMetrics().density + 0.5f));
+	}
+
+	public static int dip2Pix(Context context, float value){
+		return (int) TypedValue.applyDimension(
+				TypedValue.COMPLEX_UNIT_DIP,
+				value,
+				context.getResources().getDisplayMetrics());
 	}
 
 	public static int calculateByRatio(int width, float radio) {
